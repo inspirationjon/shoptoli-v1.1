@@ -1,0 +1,10 @@
+.order-sum {
+    width: 350px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 13px;
+}
+
+.order-sum + .order-sum {
+    margin-top: 20px;
+}

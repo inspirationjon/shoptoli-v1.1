@@ -1,0 +1,114 @@
+@import '../../assets/scss/color.scss';
+
+.users-table__wrapper {
+    width: 1100px;
+    padding: 15px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 14px;
+}
+
+.users-table {
+    width: 100%;
+    max-width: 1000px;
+    display: block;
+    text-align: center;
+    border-collapse: collapse;
+    background-color: rgb(255, 255, 255);
+    margin-bottom: 15px;
+}
+
+.users-table__head,
+.users-table__body {
+    width: 100%;
+}
+.users-table__head-tr,
+.users-table__body-tr {
+    width: 100%;
+    border-bottom: 1px solid #dddddd;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.users-table__head-th,
+.users-table__body-td {
+    padding: 10px;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 26px;
+    color: #313131;
+ 
+}
+
+.users-table__head-th {
+    font-weight: 700;
+}
+
+.users-table__body-td-link {
+    display: inline-block;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 26px;
+    color: #313131;
+    text-decoration: none;
+    transition: text-decoration 0.2s ease;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.users-table__body-td-map-link {
+    text-decoration: none;
+    color: #ff5a5a;
+
+    &:hover {
+        color: #ffb740;
+    }
+}
+
+.users-table__body-td--pending {
+    width: 100%;
+    max-width: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 7px;
+    text-decoration: none;
+    background-color: rgba(255, 183, 64, 1);
+    color: white;
+    border-radius: 24px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: opacity 0.3s ease;
+
+    &:hover {
+        opacity: 0.8;
+    }
+}
+
+.users-table__body-td--more-link {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+
+    &:hover path {
+        fill: $main;
+    }
+}
+.users-table__loader {
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 100px;
+
+    width: 200px;
+}
+.users-table__controller {
+    width: 110px;
+    margin-left: auto;
+    margin-top: auto;
+}

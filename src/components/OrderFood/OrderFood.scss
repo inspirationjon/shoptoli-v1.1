@@ -1,0 +1,26 @@
+.order-food {
+   width: 265px;
+   padding: 20px;
+   margin-left: 30px;
+   border-radius: 13px;
+   background-color: #fff;
+}
+
+.order-food-info {
+   display: flex;
+   align-items: center;
+
+   svg {
+      width: 36px;
+      height: 36px;
+   }
+}
+
+.order-food-text {
+   margin-left: 16px;
+   font-weight: 700;
+}
+
+.order-food-num {
+   font-weight: 600;
+}

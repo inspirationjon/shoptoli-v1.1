@@ -1,0 +1,132 @@
+@import '../../assets/scss/color.scss';
+
+.orders-table__wrapper {
+    width: 100%;
+    max-width: 900px;
+    padding: 15px;
+    margin: 0 auto;
+    background-color: rgb(255, 255, 255);
+    border-radius: 14px;
+}
+
+.orders-table {
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+    background-color: rgb(255, 255, 255);
+    margin-bottom: 15px;
+}
+
+.orders-table__head,
+.orders-table__body {
+    width: 100%;
+}
+.orders-table__head-tr,
+.orders-table__body-tr {
+    width: 100%;
+    border-bottom: 1px solid #dddddd;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.orders-table__body-tr:hover {
+    background-color: #f7f8fa;
+}
+
+.orders-table__head-th,
+.orders-table__body-td {
+    padding: 10px;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 26px;
+    color: #313131;
+}
+
+.orders-table__body-td-name-td {
+    position: relative;
+}
+
+.orders-table__body-td-name-td svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateX(50%);
+}
+
+.orders-table__body-td-name {
+    margin: 0;
+}
+
+.orders-table__head-th {
+    font-weight: 700;
+}
+
+.orders-table__body-td-link {
+    display: inline-block;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 26px;
+    color: #313131;
+    text-decoration: none;
+    transition: text-decoration 0.2s ease;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.orders-table__body-td-map-link {
+    text-decoration: none;
+    color: #ff5a5a;
+
+    &:hover {
+        color: #ffb740;
+    }
+}
+
+.orders-table__body-td--pending {
+    width: 100%;
+    max-width: 110px;
+    padding: 7px;
+    text-decoration: none;
+    text-align: center;
+    background-color: rgba(255, 183, 64, 1);
+    color: white;
+    border-radius: 24px;
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: opacity 0.3s ease;
+
+    &:hover {
+        opacity: 0.8;
+    }
+}
+
+.orders-table__body-td--more-link {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+
+    &:hover path {
+        fill: $main;
+    }
+}
+.orders-table__loader {
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 100px;
+
+    width: 200px;
+}
+.orders-table__controller {
+    width: 110px;
+    margin-left: auto;
+    margin-top: auto;
+}

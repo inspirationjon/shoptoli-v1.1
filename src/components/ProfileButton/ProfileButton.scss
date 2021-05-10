@@ -1,0 +1,90 @@
+@import '../../assets/scss/color.scss';
+
+.profile {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    color: #313131;
+}
+
+.profile__info {
+    margin-right: 20px;
+    display: flex;
+    text-align: right;
+    flex-direction: column;
+}
+
+.profile__btn {
+    width: 50px;
+    height: 50px;
+    background: none;
+    border-radius: 50%;
+    border: none;
+    border: 1px solid $main;
+    outline: none;
+    cursor: pointer;
+}
+
+.profile__status {
+    color: #a5a5a5;
+}
+
+.profile__name {
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+.profile__wrapper {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    width: 176px;
+    top: 150%;
+    left: -30%;
+    background-color: #ffffff;
+    border-radius: 3px;
+}
+
+.logout-btn {
+    display: flex;
+    align-items: center;
+    padding: 5px 30px;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 34px;
+    color: $gray-1;
+    border: none;
+    outline: none;
+    background: none;
+    cursor: pointer;
+    border-radius: 15px;
+
+    &:hover {
+        color: $main;
+    }
+}
+
+.logout-btn svg {
+    margin-left: 20px;
+}
+
+.display-block {
+    display: block;
+}
+
+@media only screen and (max-width: 768px) {
+    .profile__info {
+        display: none;
+    }
+
+    .profile__btn {
+        width: 50px;
+        height: 50px;
+    }
+
+    .profile__wrapper {
+        right: 0;
+        width: 200px;
+    }
+}

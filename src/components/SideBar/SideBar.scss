@@ -1,0 +1,35 @@
+@import '../../assets/scss/color.scss';
+
+.sidebar-wrapper {
+    width: 100%;
+    max-width: 270px;
+    height: 100vh;
+    padding: 20px 20px;
+    background-color: white;
+}
+
+.logo-link {
+    margin-bottom: 30px;
+    display: inline-block;
+}
+
+@media only screen and (max-width: 976px) {
+    .sidebar-wrapper {
+        max-width: 250px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .sidebar-wrapper {
+     position: fixed;
+     bottom: 0;
+     left: 0;
+     width: 100%;
+     height: auto;
+     max-width:   100%;
+    }
+
+    .logo-link {
+        display: none;
+    }
+}

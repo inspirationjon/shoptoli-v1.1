@@ -1,0 +1,48 @@
+.tables-controllers__wrapper {
+    display: flex;
+}
+
+.table-controller__btn {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 34px;
+    color: rgba(81, 89, 119, 1);
+    background-color: transparent;
+    border: 1px solid #a5a5a5;
+    border-radius: 40px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease ;
+
+    &:hover {
+        background-color: rgba(81, 89, 119, 1);
+        color: white;
+    }
+
+    &:disabled{
+        opacity: 0.4;
+    }
+}
+
+.table-controller__btn + .table-controller__btn {
+    margin-left: 10px;
+}
+
+.table-controller__btn--prev,
+.table-controller__btn--next {
+    background-color: transparent;
+    border: none;
+
+    &:hover path {
+        fill: white;
+    }
+}
+
+.table-controller__btn--next {
+    transform: rotate(180deg);
+}

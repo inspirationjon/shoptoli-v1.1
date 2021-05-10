@@ -1,0 +1,40 @@
+.site-header {
+   padding: 15px 0;
+   padding-right: 20px;
+   width: 100%;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   background-color: #fff;
+}
+
+.mini-logo {
+   display: none;
+}
+
+.search-input {
+   padding: 13px 24px;
+   border: none;
+   outline: none;
+   font-size: 18px;
+   border-radius: 30px;
+   background-color: #F7F8FA;
+}
+
+.header__right {
+   display: flex;
+}
+
+@media only screen and (max-width: 768px) {
+   .site-header {
+      padding: 10px 20px;
+   }
+
+   .search-form {
+      display: none;
+   }
+
+   .mini-logo {
+      display: block;
+   }
+}
