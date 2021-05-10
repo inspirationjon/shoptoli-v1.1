@@ -19,8 +19,20 @@ function SingleOrder() {
         queryFn: () => client('admin/order/uz/' + id, { token: auth.token }),
     })
 
+    let isDeliveryFree = false
+
+    function stil(num, sale, limit = 5) {
+        if (num >= limit && sale === 'sale') {
+            isDeliveryFree = true
+        } else {
+            isDeliveryFree = false
+        }
+        return num
+    }
+
     const order = isSuccess && data?.data[0]
 
+    console.log(order)
     return (
         <>
             <div className='single-order__wrapper'>
@@ -97,27 +109,46 @@ function SingleOrder() {
                                         <th className='single-order-table__head-th'>
                                             Narxi
                                         </th>
-                                        <th className='single-order-table__head-th'>
-                                            Sotuvda
-                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody className='single-order-table__body'>
-                                    <tr className='single-order-table__body-td'>
-                                        {order.client_orders[0]
-                                            .split(';')
-                                            .map((n, index) => (
-                                                <td
-                                                    className='single-order-table__body-td'
-                                                    key={index}>
-                                                    {n}
+                                    {order.orders.map((n, index) => {
+                                        return (
+                                            <tr
+                                                className='single-order-table__body-td'
+                                                key={index + Math.random()}>
+                                                <td className='single-order-table__body-td'>
+                                                    {n?.name}
                                                 </td>
-                                            ))}
-                                    </tr>
+                                                <td className='single-order-table__body-td'>
+                                                    {stil(
+                                                        n?.quantity,
+                                                        n?.keyword,
+                                                        order.free_delivery_limit
+                                                    )}
+                                                </td>
+                                                <td className='single-order-table__body-td'>
+                                                    {n?.price}
+                                                </td>
+                                            </tr>
+                                        )
+                                    })}
                                 </tbody>
                                 <caption className='single-order-table__caption'>
-                                    Jami:{' '}
-                                    <strong>{formatMoney(order?.price)}</strong>
+                                    <p>
+                                        Delivery:{' '}
+                                        <strong>
+                                            {isDeliveryFree
+                                                ? 0
+                                                : formatMoney(order?.delivery)}
+                                        </strong>
+                                    </p>
+                                    <p>
+                                        Jami:{' '}
+                                        <strong>
+                                            {formatMoney(order?.price)}{' '}
+                                        </strong>
+                                    </p>
                                 </caption>
                             </table>
                         </div>

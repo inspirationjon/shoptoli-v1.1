@@ -9,8 +9,19 @@ import { TableLoader } from '../Lib/Loader'
 import moment from 'moment'
 import useUser from '../../hooks/useAuth'
 import { useQuery } from 'react-query'
+import clientIO from 'socket.io-client'
 
 function OrderTable() {
+    const socket = clientIO(process.env.REACT_APP_API_URL, {
+        transports: ['websocket'],
+    })
+
+    const [news, setNews] = React.useState(null)
+
+    socket.on('client_order', (obj) => {
+        setNews(obj)
+    })
+
     const [user] = useUser()
     const [page, setPage] = React.useState(1)
 
@@ -23,7 +34,6 @@ function OrderTable() {
         { keepPreviousData: true }
     )
 
-     
     return (
         <div className='orders-table__wrapper'>
             <table className='orders-table'>
@@ -42,16 +52,88 @@ function OrderTable() {
                 </thead>
 
                 {isError ? 'Error' : null}
+                <tbody className='orders-table__body'>
+                    {news &&
+                        news?.map((n) => (
+                            <tr
+                                className='orders-table__body-tr'
+                                key={n.created}>
+                                <td className='orders-table__body-td'>
+                                    {n.id}
+                                </td>
 
-                {isSuccess ? (
-                    <>
-                        <tbody className='orders-table__body'>
+                                <td className='orders-table__body-td'>
+                                    {moment(n?.created).format(
+                                        'MMMM Do, HH:mm'
+                                    )}
+                                </td>
+
+                                <td className='orders-table__body-td orders-table__body-td-name-td'>
+                                    {n?.language === 'uz' ? (
+                                        <IconUz />
+                                    ) : (
+                                        <IconRu />
+                                    )}
+                                    <p className='orders-table__body-td-name'>
+                                        {n?.first_name}
+                                    </p>
+                                </td>
+
+                                <td className='orders-table__body-td'>
+                                    <a
+                                        href={'tel:' + n?.phone}
+                                        className='orders-table__body-td-link'>
+                                        {n?.phone}
+                                    </a>
+                                </td>
+
+                                <td className='orders-table__body-td'>
+                                    {n?.sum_quantity}
+                                </td>
+
+                                <td className='orders-table__body-td'>
+                                    {n?.price}
+                                </td>
+
+                                <td className='orders-table__body-td'>
+                                    <a
+                                        className='orders-table__body-td-map-link'
+                                        target='__blank'
+                                        href={`https://www.google.com/maps/place/${n.latitude},${n.longitude}`}>
+                                        <IconMap />
+                                    </a>
+                                </td>
+                                <td className='orders-table__body-td'>
+                                    <button
+                                        className='orders-table__body-td--pending'
+                                        title='click to change status'
+                                        style={{
+                                            backgroundColor: generateStatus(
+                                                n?.status
+                                            ).color,
+                                        }}>
+                                        {generateStatus(n?.status).status}
+                                    </button>
+                                </td>
+
+                                <td className='orders-table__body-td '>
+                                    <Link
+                                        to={`/order/${n.id}`}
+                                        className='orders-table__body-td--more-link'>
+                                        <IconMoreLink />
+                                    </Link>
+                                </td>
+                            </tr>
+                        ))}
+                        
+                    {isSuccess ? (
+                        <>
                             {orders?.data?.map((item, index) => (
                                 <tr
                                     className='orders-table__body-tr'
                                     key={item.created}>
                                     <td className='orders-table__body-td'>
-                                        {index + 1}
+                                        {item?.id}
                                     </td>
 
                                     <td className='orders-table__body-td'>
@@ -80,11 +162,7 @@ function OrderTable() {
                                     </td>
 
                                     <td className='orders-table__body-td'>
-                                        {
-                                            item?.quantity.map(
-                                                (item) => (item += item)
-                                            )[0]
-                                        }
+                                        {item?.sum_quantity}
                                     </td>
 
                                     <td className='orders-table__body-td'>
@@ -124,9 +202,9 @@ function OrderTable() {
                                     </td>
                                 </tr>
                             ))}
-                        </tbody>
-                    </>
-                ) : null}
+                        </>
+                    ) : null}
+                </tbody>
             </table>
             {isLoading ? (
                 <TableLoader className='orders-table__loader' />
