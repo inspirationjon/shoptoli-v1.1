@@ -1,0 +1,76 @@
+.status-modal {
+    position: absolute;
+    z-index: 100;
+    top: 0;
+    left: 102%;
+    width: 170px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.status-modal__header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.status-modal__heading {
+    margin: 0;
+    font-size: 18px;
+    line-height: 1;
+    color: #56678e;
+}
+
+.status-modal__delete {
+    width: 50px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    margin-left: 10px;
+    background-color: transparent;
+    border: none;
+    color: #FF3030;
+    cursor: pointer;
+
+    &:hover{
+        opacity: 0.8;
+    }
+}
+
+.status-modal__input:checked ~ .status-modal__label {
+    background-image: url('../../assets/images/check.svg');
+}
+
+.status-modal__label {
+    display: block;
+    padding: 10px;
+    padding-right: 15px;
+    background-position: right 5px center;
+    background-repeat: no-repeat;
+    background-size: 24px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.status-modal__label:hover {
+    color: #ffd92a;
+}
+
+.status-modal__submit-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px;
+    font-weight: bold;
+    color: #56678e;
+    background-color: #edeef1;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.status-modal__submit-btn:hover {
+    opacity: 0.8;
+}
