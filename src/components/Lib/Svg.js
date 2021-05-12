@@ -492,7 +492,6 @@ function IconCheck() {
             width='30'
             height='30'
             viewBox='0 0 32 32'
-            width='512'
             xmlns='http://www.w3.org/2000/svg'>
             <path
                 d='m26 32h-20c-3.314 0-6-2.686-6-6v-20c0-3.314 2.686-6 6-6h20c3.314 0 6 2.686 6 6v20c0 3.314-2.686 6-6 6z'
@@ -526,5 +525,5 @@ export {
     IconUz,
     IconRu,
     IconPhone,
-    IconCheck
+    IconCheck,
 }
