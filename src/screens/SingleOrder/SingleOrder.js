@@ -9,6 +9,7 @@ import { TableLoader } from '../../components/Lib/Loader'
 import useAuth from '../../hooks/useAuth'
 import moment from 'moment'
 import './SingleOrder.scss'
+import StatusModal from '../../components/StatusModal/StatusModal'
 
 function SingleOrder() {
     const { id } = useParams()
@@ -32,7 +33,15 @@ function SingleOrder() {
 
     const order = isSuccess && data?.data[0]
 
-    console.log(order)
+    const [modal, setModal] = React.useState({})
+
+    function handleClickModalStatus(evt) {
+        setModal({
+            open: true,
+            order_id: evt.target.dataset.orderid,
+            order_status: evt.target.dataset.orderstatus,
+        })
+    }
     return (
         <>
             <div className='single-order__wrapper'>
@@ -86,7 +95,10 @@ function SingleOrder() {
 
                                     <button
                                         className='single-order__status-btn single-order__status-btn'
-                                        title='click to change status'
+                                        title='doubleclick to change status'
+                                        data-orderid={order?.id}
+                                        data-orderstatus={order?.status}
+                                        onDoubleClick={handleClickModalStatus}
                                         style={{
                                             backgroundColor: generateStatus(
                                                 order?.status
@@ -154,6 +166,8 @@ function SingleOrder() {
                         </div>
                     </>
                 )}
+
+                <StatusModal modal={modal} setModal={setModal} />
             </div>
         </>
     )

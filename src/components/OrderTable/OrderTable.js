@@ -119,7 +119,7 @@ function OrderTable() {
                                 <td className='orders-table__body-td'>
                                     <button
                                         className='orders-table__body-td--pending'
-                                        title='click to change status'
+                                        title='doubleclick to change status'
                                         data-orderid={n?.id}
                                         data-orderstatus={n?.status}
                                         onDoubleClick={handleClickModalStatus}
