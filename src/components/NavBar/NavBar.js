@@ -20,7 +20,7 @@ function Navbar() {
                         to='/'
                         exact>
                         <IconOrder className='nav-link-icon' />
-                        <span className='nav-link-text'>Orders</span>
+                        <span className='nav-link-text'>Buyurtmalar</span>
                     </NavLink>
                 </li>
                 <li className='nav-list-item'>
@@ -29,7 +29,7 @@ function Navbar() {
                         activeClassName='nav-link--active'
                         to='/clients'>
                         <IconClient className='nav-link-icon' />
-                        <span className='nav-link-text'>Clients</span>
+                        <span className='nav-link-text'>Mijozlar</span>
                     </NavLink>
                 </li>
                 <li className='nav-list-item'>
@@ -38,7 +38,7 @@ function Navbar() {
                         activeClassName='nav-link--active'
                         to='/products'>
                         <IconProducts className='nav-link-icon' />
-                        <span className='nav-link-text'>Products</span>
+                        <span className='nav-link-text'>Mahsulotlar</span>
                     </NavLink>
                 </li>
                 <li className='nav-list-item'>
@@ -47,7 +47,7 @@ function Navbar() {
                         activeClassName='nav-link--active'
                         to='/statistics'>
                         <IconStat className='nav-link-icon' />
-                        <span className='nav-link-text'>Statistics</span>
+                        <span className='nav-link-text'>Statistika</span>
                     </NavLink>
                 </li>
                 <li className='nav-list-item'>
@@ -56,7 +56,7 @@ function Navbar() {
                         activeClassName='nav-link--active'
                         to='/settings'>
                         <IconSettings className='nav-link-icon' />
-                        <span className='nav-link-text'>Settings</span>
+                        <span className='nav-link-text'>Sozlamalar</span>
                     </NavLink>
                 </li>
             </ul>

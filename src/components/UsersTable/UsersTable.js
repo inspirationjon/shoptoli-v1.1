@@ -1,134 +1,255 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { client } from '../../utils/api-client'
+import { generateStatus } from '../../utils/generate-status'
+import { generateBadge } from '../../utils/generate-badge'
 import TablePaginationController from '../TablePaginationController/TablePaginationController'
-import { IconMoreLink, IconPending, IconMap } from '../Lib/Svg'
+import StatusModal from '../StatusModal/StatusModal'
+import { IconMoreLink, IconMap, IconRu, IconUz, IconBadge } from '../Lib/Svg'
 import './UsersTable.scss'
 import { TableLoader } from '../Lib/Loader'
 import moment from 'moment'
-import useAuth from '../../hooks/useAuth'
+import useUser from '../../hooks/useAuth'
 import { useQuery } from 'react-query'
+import clientIO from 'socket.io-client'
 
 function UsersTable() {
-    const [auth] = useAuth()
+    const socket = clientIO(process.env.REACT_APP_API_URL, {
+        transports: ['websocket'],
+    })
+
+    const [news, setNews] = React.useState(null)
+
+    socket.on('client_order', (obj) => {
+        setNews(obj)
+    })
+
+    const [user] = useUser()
     const [page, setPage] = React.useState(1)
 
     const fetchProjects = (page = 0) =>
-        client('admin/users/uz/7/' + page, { token: auth.token })
+        client('admin/orders/uz/5/' + page, { token: user.token })
 
-    const { data: users, isError, isLoading, isSuccess } = useQuery(
-        ['questions', page],
-        () => fetchProjects(page),
-        { keepPreviousData: true }
-    )
+    const {
+        data: orders,
+        isError,
+        isLoading,
+        isSuccess,
+    } = useQuery(['orders', page], () => fetchProjects(page), {
+        keepPreviousData: true,
+    })
 
+    const [modal, setModal] = React.useState({})
+
+    function handleClickModalStatus(evt) {
+        setModal({
+            open: true,
+            order_id: evt.target.dataset.orderid,
+            order_status: evt.target.dataset.orderstatus,
+        })
+    }
     return (
-        <div className='users-table__wrapper'>
-            <table className='users-table'>
-                <thead className='users-table__head'>
-                    <tr className='users-table__head-tr'>
-                        <th className='users-table__head-th'>ID</th>
-                        <th className='users-table__head-th'>Sana</th>
-                        <th className='users-table__head-th'>Ism</th>
-                        <th className='users-table__head-th'>Telefon raqam</th>
-                        <th className='users-table__head-th'>Buyurtma nomi</th>
-                        <th className='users-table__head-th'>Soni</th>
-                        <th className='users-table__head-th'>Narxi</th>
-                        <th className='users-table__head-th'>Manzil</th>
-                        <th className='users-table__head-th'>Status</th>
-                        <th className='users-table__head-th'>More</th>
+        <div className='orders-table__wrapper'>
+            <table className='orders-table'>
+                <thead className='orders-table__head'>
+                    <tr className='orders-table__head-tr'>
+                        <th className='orders-table__head-th'>ID</th>
+                        <th className='orders-table__head-th'>Sana</th>
+                        <th className='orders-table__head-th'>Ism</th>
+                        <th className='orders-table__head-th'>Telefon raqam</th>
+                        <th className='orders-table__head-th'>Soni</th>
+                        <th className='orders-table__head-th'>Narxi</th>
+                        <th className='orders-table__head-th'>Manzil</th>
+                        <th className='orders-table__head-th'>Status</th>
+                        <th className='orders-table__head-th'>More</th>
                     </tr>
                 </thead>
 
                 {isError ? 'Error' : null}
+                <tbody className='orders-table__body'>
+                    {news &&
+                        news?.map((n) => (
+                            <tr
+                                className='orders-table__body-tr'
+                                key={n.created}>
+                                <td className='orders-table__body-td'>
+                                    {n.id}
+                                </td>
 
-                {isSuccess ? (
-                    <>
-                        <tbody className='users-table__body'>
-                            {users?.data?.map((item) => (
+                                <td className='orders-table__body-td'>
+                                    {moment(n?.created).format(
+                                        'MMMM Do, HH:mm'
+                                    )}
+                                </td>
+
+                                <td className='orders-table__body-td orders-table__body-td-name-td'>
+                                    {n?.language === 'uz' ? (
+                                        <IconUz className='orders-table__lang-icon' />
+                                    ) : (
+                                        <IconRu className='orders-table__lang-icon' />
+                                    )}
+                                    <IconBadge
+                                        className='orders-table__client-badge'
+                                        color={generateBadge(n?.badge).color}
+                                    />
+                                    <p className='orders-table__body-td-name'>
+                                        {n?.first_name}
+                                    </p>
+                                </td>
+
+                                <td className='orders-table__body-td'>
+                                    <a
+                                        href={'tel:' + n?.phone}
+                                        className='orders-table__body-td-link'>
+                                        {n?.phone}
+                                    </a>
+                                </td>
+
+                                <td className='orders-table__body-td'>
+                                    {n?.sum_quantity}
+                                </td>
+
+                                <td className='orders-table__body-td'>
+                                    {n?.price}
+                                </td>
+
+                                <td className='orders-table__body-td'>
+                                    <a
+                                        className='orders-table__body-td-map-link'
+                                        target='__blank'
+                                        href={`https://www.google.com/maps/place/${n.latitude},${n.longitude}`}>
+                                        <IconMap />
+                                    </a>
+                                </td>
+                                <td className='orders-table__body-td'>
+                                    <button
+                                        className='orders-table__body-td--pending'
+                                        title='doubleclick to change status'
+                                        data-orderid={n?.id}
+                                        data-orderstatus={n?.status}
+                                        onDoubleClick={handleClickModalStatus}
+                                        style={{
+                                            backgroundColor: generateStatus(
+                                                n?.status
+                                            ).color,
+                                        }}>
+                                        {generateStatus(n?.status).status}
+                                    </button>
+                                </td>
+
+                                <td className='orders-table__body-td '>
+                                    <Link
+                                        to={`/order/${n.id}`}
+                                        className='orders-table__body-td--more-link'>
+                                        <IconMoreLink />
+                                    </Link>
+                                </td>
+                            </tr>
+                        ))}
+
+                    {isSuccess ? (
+                        <>
+                            {orders?.data?.map((item, index) => (
                                 <tr
-                                    className='users-table__body-tr'
+                                    className='orders-table__body-tr'
                                     key={item.created}>
-                                    <td className='users-table__body-td'>
-                                        {item?.client_id}
+                                    <td className='orders-table__body-td'>
+                                        {item?.id}
                                     </td>
 
-                                    <td className='users-table__body-td'>
-                                        {moment(item?.created).format('L')}
+                                    <td className='orders-table__body-td'>
+                                        {moment(item?.created).format(
+                                            'MMMM Do, HH:mm'
+                                        )}
                                     </td>
 
-                                    <td className='users-table__body-td'>
-                                        <a
-                                            href='#tme'
-                                            className='users-table__body-td-link'>
+                                    <td className='orders-table__body-td orders-table__body-td-name-td'>
+                                        {item?.language === 'uz' ? (
+                                            <IconUz className='orders-table__lang-icon' />
+                                        ) : (
+                                            <IconRu className='orders-table__lang-icon' />
+                                        )}
+                                        <IconBadge
+                                            className='orders-table__client-badge'
+                                            color={
+                                                generateBadge(item?.badge).color
+                                            }
+                                        />
+                                        <p className='orders-table__body-td-name'>
                                             {item?.first_name}
-                                        </a>
+                                        </p>
                                     </td>
 
-                                    <td className='users-table__body-td'>
+                                    <td className='orders-table__body-td'>
                                         <a
                                             href={'tel:' + item?.phone}
-                                            className='users-table__body-td-link'>
+                                            className='orders-table__body-td-link'>
                                             {item?.phone}
                                         </a>
                                     </td>
 
-                                    <td className='users-table__body-td'>
-                                        {item?.name.join(', ')}
+                                    <td className='orders-table__body-td'>
+                                        {item?.sum_quantity}
                                     </td>
 
-                                    <td className='users-table__body-td'>
-                                        {
-                                            item?.quantity.map(
-                                                (item) => (item += item)
-                                            )[0]
-                                        }
-                                    </td>
-
-                                    <td className='users-table__body-td'>
+                                    <td className='orders-table__body-td'>
                                         {item?.price}
                                     </td>
 
-                                    <td className='users-table__body-td'>
+                                    <td className='orders-table__body-td'>
                                         <a
-                                            className='users-table__body-td-map-link'
-                                            target='blank'
+                                            className='orders-table__body-td-map-link'
+                                            target='__blank'
                                             href={`https://www.google.com/maps/place/${item.latitude},${item.longitude}`}>
                                             <IconMap />
                                         </a>
                                     </td>
-                                    <td className='users-table__body-td '>
-                                        <a
-                                            className='users-table__body-td--pending'
-                                            href='#dwdw'>
-                                            <IconPending />
-                                            {item?.status === 1
-                                                ? 'Pending'
-                                                : 'Canceled'}
-                                        </a>
+                                    <td className='orders-table__body-td orders-table__body-td-status'>
+                                        <button
+                                            className='orders-table__body-td--pending'
+                                            title='click to change status'
+                                            data-orderid={item?.id}
+                                            data-orderstatus={item?.status}
+                                            onDoubleClick={
+                                                handleClickModalStatus
+                                            }
+                                            style={{
+                                                backgroundColor: generateStatus(
+                                                    item?.status
+                                                ).color,
+                                            }}>
+                                            {
+                                                generateStatus(item?.status)
+                                                    .status
+                                            }
+                                        </button>
                                     </td>
-                                    <td className='users-table__body-td '>
+
+                                    <td className='orders-table__body-td '>
                                         <Link
-                                            to={`/client-order/${item.client_id}`}
-                                            className='users-table__body-td--more-link'
-                                            href='#dwdw'>
+                                            to={`/order/${item.id}`}
+                                            className='orders-table__body-td--more-link'>
                                             <IconMoreLink />
                                         </Link>
                                     </td>
                                 </tr>
                             ))}
-                        </tbody>
-                    </>
-                ) : null}
+                        </>
+                    ) : null}
+                </tbody>
             </table>
-            {isLoading ? <TableLoader className='users-table__loader' /> : null}
+            {isLoading ? (
+                <TableLoader className='orders-table__loader' />
+            ) : null}
 
             <TablePaginationController
-                className='users-table__controller'
+                className='orders-table__controller'
                 setPage={setPage}
                 noPrev={page === 1 ? true : false}
-                noNext={users?.data?.length ? false : true}
+                noNext={orders?.data?.length ? false : true}
             />
+
+            <StatusModal modal={modal} setModal={setModal} />
         </div>
     )
 }

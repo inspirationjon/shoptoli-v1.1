@@ -1,18 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import './ProductBox.scss'
-import clientIO from 'socket.io-client'
+ 
 
 function ProductBox() {
-    const socket = clientIO(process.env.REACT_APP_API_URL, {
-        transports: ['websocket'],
-    })
-
-    React.useEffect(() => {
-        socket.on('client_order', (obj) => {
-            console.log(obj)
-        })
-    }, [socket])
+ 
 
     return (
         <div className='product-box'>

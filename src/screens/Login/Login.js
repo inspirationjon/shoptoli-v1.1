@@ -17,10 +17,14 @@ function Login() {
                 password: password.value.trim(),
             },
         }).then((data) => {
-            setAuth({
-                token: data.token,
-                username: data.data[0].username,
-            })
+            if (data.status === 401) {
+                alert('Bunday admin mavjud emas :(')
+            } else {
+                setAuth({
+                    token: data.token,
+                    username: data.data[0].username,
+                })
+            }
         })
     }
 
@@ -48,12 +52,12 @@ function Login() {
                             fill='#333333'
                             d='M359.531,237.824l-64-64c-4.16-4.16-10.923-4.16-15.083,0s-4.16,10.923,0,15.083l56.448,56.448l-56.448,56.448 c-4.16,4.16-4.16,10.923,0,15.083c2.091,2.069,4.821,3.115,7.552,3.115s5.461-1.045,7.531-3.093l64-64 C363.691,248.747,363.691,241.984,359.531,237.824z'></path>
                     </svg>
-                    <span className='login-form__text'>Login</span>
+                    <span className='login-form__text'>Kirish</span>
                 </h2>
 
                 <div className='form-input__wrapper'>
                     <label className='form-input__label' htmlFor='username'>
-                        Username
+                        Foydalanuchi ismi
                     </label>
 
                     <div className='form-input__inner'>
@@ -77,14 +81,14 @@ function Login() {
                             type='text'
                             id='username'
                             name='username'
-                            placeholder='Username'
+                            placeholder='Foydalanuchi ismi'
                             required
                         />
                     </div>
                 </div>
                 <div className='form-input__wrapper'>
                     <label className='form-input__label' htmlFor='password'>
-                        Password
+                        Parol
                     </label>
 
                     <div className='form-input__inner'>
@@ -102,12 +106,12 @@ function Login() {
                             type='password'
                             id='password'
                             name='password'
-                            placeholder='Password'
+                            placeholder='Parol'
                             required
                         />
                     </div>
 
-                    <button className='login-submit__btn'>Enter</button>
+                    <button className='login-submit__btn'>Yuborish</button>
                 </div>
             </form>
         </div>

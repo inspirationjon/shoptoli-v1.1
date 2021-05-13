@@ -41,7 +41,6 @@ function OrderTable() {
 
     const [modal, setModal] = React.useState({})
 
-    orders && console.log(orders)
     function handleClickModalStatus(evt) {
         setModal({
             open: true,
@@ -61,8 +60,8 @@ function OrderTable() {
                         <th className='orders-table__head-th'>Soni</th>
                         <th className='orders-table__head-th'>Narxi</th>
                         <th className='orders-table__head-th'>Manzil</th>
-                        <th className='orders-table__head-th'>Status</th>
-                        <th className='orders-table__head-th'>More</th>
+                        <th className='orders-table__head-th'>Holat</th>
+                        <th className='orders-table__head-th'>Ko'proq</th>
                     </tr>
                 </thead>
 

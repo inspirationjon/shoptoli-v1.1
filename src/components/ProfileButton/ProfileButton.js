@@ -25,7 +25,7 @@ function ProfileButton() {
             </button>
             <div className='profile__wrapper' ref={profilWrap}>
                 <button className='logout-btn' onClick={handleLogOut}>
-                    Log Out
+                    Chiqish
                     <svg
                         width='20'
                         height='35'

@@ -107,7 +107,7 @@ function SingleOrder() {
 
                                 <div className='single-order__status-wrapper'>
                                     <h3 className='single-order__status-heading'>
-                                        Status
+                                        Holat
                                     </h3>
 
                                     <button
@@ -165,7 +165,7 @@ function SingleOrder() {
                                 </tbody>
                                 <caption className='single-order-table__caption'>
                                     <p>
-                                        Delivery:{' '}
+                                        Yetkazib berish:{' '}
                                         <strong>
                                             {isDeliveryFree
                                                 ? 0

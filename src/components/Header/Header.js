@@ -11,7 +11,7 @@ function Header () {
             <MiniLogo />
          </Link>
          <form className="search-form">
-            <input className="search-input" placeholder="Search here..." type="text" />
+            <input className="search-input" placeholder="Mijozni qidiring..." type="text" />
          </form>
          <div className="header__right">
             <ProfileButton />
