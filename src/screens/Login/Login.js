@@ -57,7 +57,7 @@ function Login() {
 
                 <div className='form-input__wrapper'>
                     <label className='form-input__label' htmlFor='username'>
-                        Foydalanuchi ismi
+                        Foydalanuvchi ismi
                     </label>
 
                     <div className='form-input__inner'>
@@ -81,7 +81,7 @@ function Login() {
                             type='text'
                             id='username'
                             name='username'
-                            placeholder='Foydalanuchi ismi'
+                            placeholder='Foydalanuvchi ismi'
                             required
                         />
                     </div>
