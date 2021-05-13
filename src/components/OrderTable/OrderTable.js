@@ -38,6 +38,15 @@ function OrderTable() {
         keepPreviousData: true,
     })
 
+    const [modal, setModal] = React.useState({})
+
+    function handleClickModalStatus(evt) {
+        setModal({
+            open: true,
+            order_id: evt.target.dataset.orderid,
+            order_status: evt.target.dataset.orderstatus,
+        })
+    }
     return (
         <div className='orders-table__wrapper'>
             <table className='orders-table'>
@@ -111,6 +120,9 @@ function OrderTable() {
                                     <button
                                         className='orders-table__body-td--pending'
                                         title='click to change status'
+                                        data-orderid={n?.id}
+                                        data-orderstatus={n?.status}
+                                        onDoubleClick={handleClickModalStatus}
                                         style={{
                                             backgroundColor: generateStatus(
                                                 n?.status
@@ -185,6 +197,11 @@ function OrderTable() {
                                         <button
                                             className='orders-table__body-td--pending'
                                             title='click to change status'
+                                            data-orderid={item?.id}
+                                            data-orderstatus={item?.status}
+                                            onDoubleClick={
+                                                handleClickModalStatus
+                                            }
                                             style={{
                                                 backgroundColor: generateStatus(
                                                     item?.status
@@ -221,7 +238,7 @@ function OrderTable() {
                 noNext={orders?.data?.length ? false : true}
             />
 
-            <StatusModal />
+            <StatusModal modal={modal} setModal={setModal} />
         </div>
     )
 }

@@ -1,7 +1,6 @@
 @import '../../assets/scss/color.scss';
 
 .orders-table__wrapper {
-    position: relative;
     width: 100%;
     max-width: 900px;
     padding: 15px;
@@ -46,11 +45,6 @@
 
 .orders-table__body-td-name-td {
     position: relative;
-}
-
-.orders-table__body-td-status {
-    position: relative;
-    z-index: 1;
 }
 
 .orders-table__body-td-name-td svg {

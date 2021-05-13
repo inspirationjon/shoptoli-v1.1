@@ -1,9 +1,19 @@
-.status-modal {
-    position: absolute;
+.status-modal__wrapper {
+    position: fixed;
     z-index: 100;
     top: 0;
-    left: 102%;
-    width: 170px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba($color: #333, $alpha: 0.2);
+    display: none;
+}
+
+.status-modal {
+    width: 250px;
     padding: 20px;
     background-color: #fff;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -12,6 +22,7 @@
 .status-modal__header {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     margin-bottom: 10px;
 }
 
@@ -32,11 +43,12 @@
     margin-left: 10px;
     background-color: transparent;
     border: none;
-    color: #FF3030;
+    color: #ff3030;
     cursor: pointer;
+    transition: transform 0.3s ease;
 
-    &:hover{
-        opacity: 0.8;
+    &:hover {
+        transform: scale(1.4);
     }
 }
 
@@ -60,7 +72,8 @@
 }
 
 .status-modal__submit-btn {
-    display: inline-block;
+    width: 100%;
+    display: block;
     margin-top: 10px;
     padding: 10px;
     font-weight: bold;
