@@ -2,9 +2,10 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { client } from '../../utils/api-client'
 import { generateStatus } from '../../utils/generate-status'
+import { generateBadge } from '../../utils/generate-badge'
 import TablePaginationController from '../TablePaginationController/TablePaginationController'
 import StatusModal from '../StatusModal/StatusModal'
-import { IconMoreLink, IconMap, IconRu, IconUz } from '../Lib/Svg'
+import { IconMoreLink, IconMap, IconRu, IconUz, IconBadge } from '../Lib/Svg'
 import './OrderTable.scss'
 import { TableLoader } from '../Lib/Loader'
 import moment from 'moment'
@@ -40,6 +41,7 @@ function OrderTable() {
 
     const [modal, setModal] = React.useState({})
 
+    orders && console.log(orders)
     function handleClickModalStatus(evt) {
         setModal({
             open: true,
@@ -82,11 +84,15 @@ function OrderTable() {
                                 </td>
 
                                 <td className='orders-table__body-td orders-table__body-td-name-td'>
-                                    {n?.language === 'ru' ? (
-                                        <IconRu />
+                                    {n?.language === 'uz' ? (
+                                        <IconUz className='orders-table__lang-icon' />
                                     ) : (
-                                        <IconUz />
+                                        <IconRu className='orders-table__lang-icon' />
                                     )}
+                                    <IconBadge
+                                        className='orders-table__client-badge'
+                                        color={generateBadge(n?.badge).color}
+                                    />
                                     <p className='orders-table__body-td-name'>
                                         {n?.first_name}
                                     </p>
@@ -160,10 +166,16 @@ function OrderTable() {
 
                                     <td className='orders-table__body-td orders-table__body-td-name-td'>
                                         {item?.language === 'uz' ? (
-                                            <IconUz />
+                                            <IconUz className='orders-table__lang-icon' />
                                         ) : (
-                                            <IconRu />
+                                            <IconRu className='orders-table__lang-icon' />
                                         )}
+                                        <IconBadge
+                                            className='orders-table__client-badge'
+                                            color={
+                                                generateBadge(item?.badge).color
+                                            }
+                                        />
                                         <p className='orders-table__body-td-name'>
                                             {item?.first_name}
                                         </p>

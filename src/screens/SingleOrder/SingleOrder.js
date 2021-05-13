@@ -3,8 +3,15 @@ import { useQuery } from 'react-query'
 import { useParams } from 'react-router-dom'
 import { client } from '../../utils/api-client'
 import { generateStatus } from '../../utils/generate-status'
+import { generateBadge } from '../../utils/generate-badge'
 import { formatMoney } from '../../utils/format-money'
-import { IconRu, IconUz, IconMap, IconPhone } from '../../components/Lib/Svg'
+import {
+    IconRu,
+    IconUz,
+    IconMap,
+    IconPhone,
+    IconBadge,
+} from '../../components/Lib/Svg'
 import { TableLoader } from '../../components/Lib/Loader'
 import useAuth from '../../hooks/useAuth'
 import moment from 'moment'
@@ -53,14 +60,20 @@ function SingleOrder() {
                     <>
                         <div className='single-order__header'>
                             <div className='single-order__flag-wrapper'>
+                                {order?.language === 'uz' ? (
+                                    <IconUz className='single-order__lang-icon' />
+                                ) : (
+                                    <IconRu className='single-order__lang-icon' />
+                                )}
+
+                                <IconBadge
+                                    className='single-order__badge'
+                                    color={generateBadge(order?.badge).color}
+                                />
+
                                 <h3 className='single-order__client-name'>
                                     {order?.first_name}
                                 </h3>
-                                {order?.language === 'uz' ? (
-                                    <IconUz />
-                                ) : (
-                                    <IconRu />
-                                )}
                             </div>
                             <time className='single-order__time'>
                                 <strong>Buyurtma vaqti: </strong>

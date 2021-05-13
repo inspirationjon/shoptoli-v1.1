@@ -32,11 +32,8 @@
     margin-right: 20px;
 }
 
-.single-order__flag-wrapper svg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    border-radius: 3px;
+.single-order__badge{
+    margin: 0 10px;
 }
 
 .single-order__tel-link {
@@ -82,7 +79,7 @@
 }
 
 .single-order__status-wrapper {
-    width: 120px;
+    width: 150px;
     padding: 15px;
     border-radius: 3px;
     text-align: center;
@@ -90,7 +87,6 @@
 
 .single-order__status-btn {
     width: 100%;
-    max-width: 110px;
     padding: 15px;
     text-decoration: none;
     background-color: rgba(255, 183, 64, 1);
