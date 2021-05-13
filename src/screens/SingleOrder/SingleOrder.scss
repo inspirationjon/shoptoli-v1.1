@@ -4,6 +4,7 @@
 }
 
 .single-order__wrapper {
+    position: relative;
     width: 100%;
     max-width: 900px;
     margin: 30px auto;
@@ -19,6 +20,18 @@
     box-shadow: 0 2px rgba($color: #000000, $alpha: 0.1);
 }
 
+.single-order__back-link {
+    position: absolute;
+    z-index: 2;
+    top: 10px;
+    left: 15px;
+    display: block;
+
+    &:hover {
+        opacity: 0.8;
+    }
+}
+
 .single-order__flag-wrapper {
     position: relative;
     display: flex;
@@ -32,7 +45,7 @@
     margin-right: 20px;
 }
 
-.single-order__badge{
+.single-order__badge {
     margin: 0 10px;
 }
 

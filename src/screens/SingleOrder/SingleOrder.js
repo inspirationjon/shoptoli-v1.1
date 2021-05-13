@@ -1,6 +1,6 @@
 import React from 'react'
 import { useQuery } from 'react-query'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { client } from '../../utils/api-client'
 import { generateStatus } from '../../utils/generate-status'
 import { generateBadge } from '../../utils/generate-badge'
@@ -11,6 +11,7 @@ import {
     IconMap,
     IconPhone,
     IconBadge,
+    IconBack,
 } from '../../components/Lib/Svg'
 import { TableLoader } from '../../components/Lib/Loader'
 import useAuth from '../../hooks/useAuth'
@@ -59,6 +60,9 @@ function SingleOrder() {
                 {isSuccess && (
                     <>
                         <div className='single-order__header'>
+                            <Link className='single-order__back-link' to='/'>
+                                <IconBack />
+                            </Link>
                             <div className='single-order__flag-wrapper'>
                                 {order?.language === 'uz' ? (
                                     <IconUz className='single-order__lang-icon' />
@@ -68,7 +72,7 @@ function SingleOrder() {
 
                                 <IconBadge
                                     className='single-order__badge'
-                                    color={generateBadge(order?.badge).color}
+                                    color={generateBadge(order?.badge)?.color}
                                 />
 
                                 <h3 className='single-order__client-name'>
