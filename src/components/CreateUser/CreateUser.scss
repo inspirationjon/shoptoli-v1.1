@@ -1,0 +1,34 @@
+.create-user__form {
+   display: flex;
+   margin-left: auto;
+   margin-right: auto;
+}
+
+.create-user__input {
+   width: 300px;
+   padding: 10px 15px;
+   margin-left: 20px;
+   margin-right: 20px;
+   margin-bottom: 20px;
+   border-radius: 50px;
+   border: 1px solid #515977;
+   font-size: 16px;
+   outline: none;
+}
+
+.create-user__btn {
+   height: 40px;
+   margin-left: auto;
+   padding: 10px 15px;
+   max-width: 150px;
+   width: 100%;
+   border-radius: 50px;
+   border: 1px solid #515977;
+   font-size: 16px;
+   color: #515977;
+   cursor: pointer;
+
+   &:hover {
+      background-color: #d6d7d8;
+   }
+}
