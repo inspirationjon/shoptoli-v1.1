@@ -1,8 +1,25 @@
+import './Settings.scss'
+import { NavLink } from 'react-router-dom'
+import Private from '../../routes/Private'
+import CreateUser from '../../components/CreateUser/CreateUser'
+import ChangeInfo from '../../components/ChangeInfo/ChangeInfo'
+
 function Settings () {
    return (
-      <>
-         Settings...
-      </>
+      <div className="settings">
+         <ul className="settings__list">
+            <li className="settings__item">
+               <NavLink className="settings__link" activeClassName="settings__link-active" exact to="/settings">Create User</NavLink>
+            </li>
+            <li className="settings__item">
+               <NavLink className="settings__link" activeClassName="settings__link-active" exact to="/settings/change-info">Create User</NavLink>
+            </li>
+         </ul>
+         <div>
+            <Private path="/settings" exact component={CreateUser} />
+            <Private path="/settings/change-info" exact component={ChangeInfo} />
+         </div>
+      </div>
    )   
 }
 
