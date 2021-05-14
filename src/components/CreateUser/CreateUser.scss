@@ -32,3 +32,27 @@
       background-color: #d6d7d8;
    }
 }
+
+.create-user__list {
+   margin: 0;
+   margin-left: 20px;
+   padding: 0;
+   list-style-type: none;
+}
+
+.create-user__item {
+   padding: 5px 15px;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   background-color: #fff;
+   max-width: 300px;
+}
+
+.create-user__bin-btn {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   width: 36px;
+   height: 36px;
+}
