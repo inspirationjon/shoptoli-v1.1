@@ -46,7 +46,6 @@ function App() {
                             <Private
                                 path='/settings'
                                 component={Settings}
-                                exact
                             />
                         </Switch>
                     </div>
