@@ -12,19 +12,19 @@ function CreateUser () {
 
          <ul className="create-user__list">
             <li className="create-user__item">
-               <p>shuhratbek</p>
+               <p className="create-user__text">shuhratbek</p>
                <button className="create-user__bin-btn"><Bin /></button>
             </li>
             <li className="create-user__item">
-               <p>shuhratbek</p>
+               <p className="create-user__text">shuhratbek</p>
                <button className="create-user__bin-btn"><Bin /></button>
             </li>
             <li className="create-user__item">
-               <p>shuhratbek</p>
+               <p className="create-user__text">shuhratbek</p>
                <button className="create-user__bin-btn"><Bin /></button>
             </li>
             <li className="create-user__item">
-               <p>shuhratbek</p>
+               <p className="create-user__text">shuhratbek</p>
                <button className="create-user__bin-btn"><Bin /></button>
             </li>
          </ul>

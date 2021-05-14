@@ -49,10 +49,20 @@
    max-width: 300px;
 }
 
+.create-user__text {
+   font-size: 17px;
+}
+
 .create-user__bin-btn {
    display: flex;
    align-items: center;
    justify-content: center;
    width: 36px;
    height: 36px;
+   cursor: pointer;
+   transition: 0.2s ease;
+
+   &:hover svg path {
+      fill: #515977;
+   }
 }
