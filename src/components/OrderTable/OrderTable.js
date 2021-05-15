@@ -18,10 +18,10 @@ function OrderTable() {
         transports: ['websocket'],
     })
 
-    const [news, setNews] = React.useState(null)
-
     socket.on('client_order', (obj) => {
-        setNews(obj)
+        if (obj) {
+            refetch()
+        }
     })
 
     const [auth, setAuth] = useAuth()
@@ -45,6 +45,7 @@ function OrderTable() {
         isError,
         isLoading,
         isSuccess,
+        refetch,
     } = useQuery(['orders', page], () => fetchProjects(page), {
         keepPreviousData: true,
     })
@@ -77,90 +78,6 @@ function OrderTable() {
 
                 {isError ? 'Error' : null}
                 <tbody className='orders-table__body'>
-                    {news &&
-                        news?.map((n) => (
-                            <tr
-                                className='orders-table__body-tr'
-                                key={Math.random()}>
-                                <td className='orders-table__body-td'>
-                                    {n.id}
-                                </td>
-
-                                <td className='orders-table__body-td'>
-                                    {moment(n?.created).format(
-                                        'MMMM Do, HH:mm'
-                                    )}
-                                </td>
-
-                                <td className='orders-table__body-td orders-table__body-td-name-td'>
-                                    {n?.language === 'uz' ? (
-                                        <IconUz className='orders-table__lang-icon' />
-                                    ) : (
-                                        <IconRu className='orders-table__lang-icon' />
-                                    )}
-                                    <IconBadge
-                                        className='orders-table__client-badge'
-                                        color={generateBadge(n?.badge)?.color}
-                                    />
-                                   <Link className='orders-table__body-td-name-link'
-                                                to={
-                                                    '/clients/' +
-                                                    n?.client_id
-                                                }>
-                                                {n?.first_name}
-                                            </Link>
-                                </td>
-
-                                <td className='orders-table__body-td'>
-                                    <a
-                                        href={'tel:' + n?.phone}
-                                        className='orders-table__body-td-link'>
-                                        {n?.phone}
-                                    </a>
-                                </td>
-
-                                <td className='orders-table__body-td'>
-                                    {n?.sum_quantity}
-                                </td>
-
-                                <td className='orders-table__body-td'>
-                                    {n?.price}
-                                </td>
-
-                                <td className='orders-table__body-td'>
-                                    <a
-                                        className='orders-table__body-td-map-link'
-                                        target='__blank'
-                                        href={`https://www.google.com/maps/place/${n?.latitude},${n?.longitude}`}>
-                                        <IconMap />
-                                    </a>
-                                </td>
-                                <td className='orders-table__body-td'>
-                                    <button
-                                        className='orders-table__body-td--pending'
-                                        title='doubleclick to change status'
-                                        data-orderid={n?.id}
-                                        data-orderstatus={n?.status}
-                                        onDoubleClick={handleClickModalStatus}
-                                        style={{
-                                            backgroundColor: generateStatus(
-                                                n?.status
-                                            )?.color,
-                                        }}>
-                                        {generateStatus(n?.status)?.status}
-                                    </button>
-                                </td>
-
-                                <td className='orders-table__body-td '>
-                                    <Link
-                                        to={`/order/${n?.id}`}
-                                        className='orders-table__body-td--more-link'>
-                                        <IconMoreLink />
-                                    </Link>
-                                </td>
-                            </tr>
-                        ))}
-
                     {isSuccess ? (
                         <>
                             {orders?.data?.map((item) => (
@@ -191,7 +108,8 @@ function OrderTable() {
                                             }
                                         />
                                         <p className='orders-table__body-td-name'>
-                                            <Link className='orders-table__body-td-name-link'
+                                            <Link
+                                                className='orders-table__body-td-name-link'
                                                 to={
                                                     '/clients/' +
                                                     item?.client_id
