@@ -28,7 +28,7 @@ function UsersTable() {
     const [page, setPage] = React.useState(1)
 
     const fetchProjects = (page = 0) =>
-        client('admin/orders/uz/5/' + page, { token: user.token })
+        client('admin/clients/uz/5/' + page, { token: user.token })
 
     const {
         data: orders,
@@ -54,116 +54,28 @@ function UsersTable() {
                 <thead className='orders-table__head'>
                     <tr className='orders-table__head-tr'>
                         <th className='orders-table__head-th'>ID</th>
-                        <th className='orders-table__head-th'>Sana</th>
                         <th className='orders-table__head-th'>Ism</th>
                         <th className='orders-table__head-th'>Telefon raqam</th>
-                        <th className='orders-table__head-th'>Soni</th>
-                        <th className='orders-table__head-th'>Narxi</th>
+                        <th className='orders-table__head-th'>Buyurtmalar</th>
                         <th className='orders-table__head-th'>Manzil</th>
-                        <th className='orders-table__head-th'>Status</th>
-                        <th className='orders-table__head-th'>More</th>
+                  
                     </tr>
                 </thead>
 
                 {isError ? 'Error' : null}
                 <tbody className='orders-table__body'>
-                    {news &&
-                        news?.map((n) => (
-                            <tr
-                                className='orders-table__body-tr'
-                                key={n.created}>
-                                <td className='orders-table__body-td'>
-                                    {n.id}
-                                </td>
-
-                                <td className='orders-table__body-td'>
-                                    {moment(n?.created).format(
-                                        'MMMM Do, HH:mm'
-                                    )}
-                                </td>
-
-                                <td className='orders-table__body-td orders-table__body-td-name-td'>
-                                    {n?.language === 'uz' ? (
-                                        <IconUz className='orders-table__lang-icon' />
-                                    ) : (
-                                        <IconRu className='orders-table__lang-icon' />
-                                    )}
-                                    <IconBadge
-                                        className='orders-table__client-badge'
-                                        color={generateBadge(n?.badge).color}
-                                    />
-                                    <p className='orders-table__body-td-name'>
-                                        {n?.first_name}
-                                    </p>
-                                </td>
-
-                                <td className='orders-table__body-td'>
-                                    <a
-                                        href={'tel:' + n?.phone}
-                                        className='orders-table__body-td-link'>
-                                        {n?.phone}
-                                    </a>
-                                </td>
-
-                                <td className='orders-table__body-td'>
-                                    {n?.sum_quantity}
-                                </td>
-
-                                <td className='orders-table__body-td'>
-                                    {n?.price}
-                                </td>
-
-                                <td className='orders-table__body-td'>
-                                    <a
-                                        className='orders-table__body-td-map-link'
-                                        target='__blank'
-                                        href={`https://www.google.com/maps/place/${n.latitude},${n.longitude}`}>
-                                        <IconMap />
-                                    </a>
-                                </td>
-                                <td className='orders-table__body-td'>
-                                    <button
-                                        className='orders-table__body-td--pending'
-                                        title='doubleclick to change status'
-                                        data-orderid={n?.id}
-                                        data-orderstatus={n?.status}
-                                        onDoubleClick={handleClickModalStatus}
-                                        style={{
-                                            backgroundColor: generateStatus(
-                                                n?.status
-                                            ).color,
-                                        }}>
-                                        {generateStatus(n?.status).status}
-                                    </button>
-                                </td>
-
-                                <td className='orders-table__body-td '>
-                                    <Link
-                                        to={`/order/${n.id}`}
-                                        className='orders-table__body-td--more-link'>
-                                        <IconMoreLink />
-                                    </Link>
-                                </td>
-                            </tr>
-                        ))}
-
+                  
                     {isSuccess ? (
                         <>
-                            {orders?.data?.map((item, index) => (
+                            {orders?.data?.map((item) => (
                                 <tr
                                     className='orders-table__body-tr'
-                                    key={item.created}>
+                                    key={Math.random()}>
                                     <td className='orders-table__body-td'>
-                                        {item?.id}
+                                        {item?.client_id}
                                     </td>
 
-                                    <td className='orders-table__body-td'>
-                                        {moment(item?.created).format(
-                                            'MMMM Do, HH:mm'
-                                        )}
-                                    </td>
-
-                                    <td className='orders-table__body-td orders-table__body-td-name-td'>
+                                   <td className='orders-table__body-td orders-table__body-td-name-td'>
                                         {item?.language === 'uz' ? (
                                             <IconUz className='orders-table__lang-icon' />
                                         ) : (
@@ -172,11 +84,12 @@ function UsersTable() {
                                         <IconBadge
                                             className='orders-table__client-badge'
                                             color={
-                                                generateBadge(item?.badge).color
+                                                generateBadge(item?.badge)
+                                                    ?.color
                                             }
                                         />
                                         <p className='orders-table__body-td-name'>
-                                            {item?.first_name}
+                                            <Link className='orders-table__body-td-name-link' to={'/clients/' + item?.client_id}>{item?.first_name}</Link>
                                         </p>
                                     </td>
 
@@ -189,49 +102,14 @@ function UsersTable() {
                                     </td>
 
                                     <td className='orders-table__body-td'>
-                                        {item?.sum_quantity}
+                                        {item?.all_orders}
                                     </td>
 
                                     <td className='orders-table__body-td'>
-                                        {item?.price}
+                                        {item?.region}
                                     </td>
-
-                                    <td className='orders-table__body-td'>
-                                        <a
-                                            className='orders-table__body-td-map-link'
-                                            target='__blank'
-                                            href={`https://www.google.com/maps/place/${item.latitude},${item.longitude}`}>
-                                            <IconMap />
-                                        </a>
-                                    </td>
-                                    <td className='orders-table__body-td orders-table__body-td-status'>
-                                        <button
-                                            className='orders-table__body-td--pending'
-                                            title='click to change status'
-                                            data-orderid={item?.id}
-                                            data-orderstatus={item?.status}
-                                            onDoubleClick={
-                                                handleClickModalStatus
-                                            }
-                                            style={{
-                                                backgroundColor: generateStatus(
-                                                    item?.status
-                                                ).color,
-                                            }}>
-                                            {
-                                                generateStatus(item?.status)
-                                                    .status
-                                            }
-                                        </button>
-                                    </td>
-
-                                    <td className='orders-table__body-td '>
-                                        <Link
-                                            to={`/order/${item.id}`}
-                                            className='orders-table__body-td--more-link'>
-                                            <IconMoreLink />
-                                        </Link>
-                                    </td>
+  
+                                    
                                 </tr>
                             ))}
                         </>

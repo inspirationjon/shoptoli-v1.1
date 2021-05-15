@@ -54,6 +54,7 @@ function EditProductModal({ modal, setModal }) {
                 </div>
 
                 <img
+                className='category-modal__img'
                     src={modal?.product_image}
                     alt='Product'
                     width='200'

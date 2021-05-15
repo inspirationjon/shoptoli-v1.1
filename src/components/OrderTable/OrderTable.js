@@ -81,7 +81,7 @@ function OrderTable() {
                         news?.map((n) => (
                             <tr
                                 className='orders-table__body-tr'
-                                key={n.created}>
+                                key={Math.random()}>
                                 <td className='orders-table__body-td'>
                                     {n.id}
                                 </td>
@@ -102,9 +102,13 @@ function OrderTable() {
                                         className='orders-table__client-badge'
                                         color={generateBadge(n?.badge)?.color}
                                     />
-                                    <p className='orders-table__body-td-name'>
-                                        {n?.first_name}
-                                    </p>
+                                   <Link className='orders-table__body-td-name-link'
+                                                to={
+                                                    '/clients/' +
+                                                    n?.client_id
+                                                }>
+                                                {n?.first_name}
+                                            </Link>
                                 </td>
 
                                 <td className='orders-table__body-td'>

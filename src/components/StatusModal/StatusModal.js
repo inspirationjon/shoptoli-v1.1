@@ -71,7 +71,7 @@ function StatusModal({ modal, setModal }) {
                     <label
                         className='status-modal__label'
                         htmlFor='user_status_ordered'>
-                        Ordered
+                        buyurtma
                     </label>
                 </label>
 
@@ -87,7 +87,7 @@ function StatusModal({ modal, setModal }) {
                     <label
                         className='status-modal__label'
                         htmlFor='user_status_verified'>
-                        Verified
+                        qabul
                     </label>
                 </label>
 
@@ -103,7 +103,7 @@ function StatusModal({ modal, setModal }) {
                     <label
                         className='status-modal__label'
                         htmlFor='user_status_delivery'>
-                        Delivery
+                        yetkazish
                     </label>
                 </label>
 
@@ -119,7 +119,23 @@ function StatusModal({ modal, setModal }) {
                     <label
                         className='status-modal__label'
                         htmlFor='user_status_completed'>
-                        Completed
+                        yakun
+                    </label>
+                </label>
+
+                <label className='status-modal__input-wrapper'>
+                    <input
+                        className='status-modal__input visually-hidden'
+                        type='radio'
+                        value='5'
+                        id='user_status_cancelled'
+                        name='user_status'
+                        onChange={handleChangeInput}
+                    />
+                    <label
+                        className='status-modal__label'
+                        htmlFor='user_status_cancelled'>
+                        bekor
                     </label>
                 </label>
 
