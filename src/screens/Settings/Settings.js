@@ -12,7 +12,7 @@ function Settings () {
                <NavLink className="settings__link" activeClassName="settings__link-active" exact to="/settings">Create User</NavLink>
             </li>
             <li className="settings__item">
-               <NavLink className="settings__link" activeClassName="settings__link-active" exact to="/settings/change-info">Create User</NavLink>
+               <NavLink className="settings__link" activeClassName="settings__link-active" exact to="/settings/change-info">Change Info</NavLink>
             </li>
          </ul>
          <div className="setings__content">

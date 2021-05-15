@@ -33,7 +33,7 @@ function CreateUser() {
    }
 
    function deleteUser(evt) {
-      console.log(evt.currentTarget.dataset.id);
+
       const data = {
          "admin_id": evt.currentTarget.dataset.id
       }
@@ -46,8 +46,6 @@ function CreateUser() {
             token: JSON.parse(window.localStorage.getItem('__auth_provider_token__')).token
          }
       })
-         .then(res => res.json())
-         .then(res => console.log(res))
          .catch(err => console.log(err))
 
       setCount(count + 1)
@@ -86,7 +84,7 @@ function CreateUser() {
 
          <ul className="create-user__list">
             {
-               users.map(item => {
+               users && users.map(item => {
                   return (
                      <li className="create-user__item" key={item.admin_id}>
                         <p className="create-user__text">{item.admin_username}</p>
