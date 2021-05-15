@@ -1,0 +1,125 @@
+.products__wrapper {
+    width: 100%;
+    max-width: 1000px;
+    height: 450px;
+    overflow-y: scroll;
+    margin: 0 auto;
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 3px;
+}
+
+.products__wrapper::-webkit-scrollbar {
+    width: 11px;
+}
+
+.products__wrapper {
+    scrollbar-width: thin;
+    scrollbar-color: #515977 #fff;
+}
+
+.products__wrapper::-webkit-scrollbar-track {
+    background: #fff;
+}
+
+.products__wrapper::-webkit-scrollbar-thumb {
+    background-color: #515977;
+    border-radius: 6px;
+    border: 3px solid #fff;
+}
+
+.products__create-form {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.products__create-form-left {
+    width: 50%;
+    margin-right: 20px;
+}
+
+.products__create-form-right {
+    width: 50%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.products__create-form-inner {
+    margin-bottom: 20px;
+}
+
+.products__create-form-label {
+    display: block;
+    margin: 0;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.products__create-input {
+    min-width: 120px;
+    display: inline-block;
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #515977;
+    border-radius: 3px;
+}
+
+.products__create-btn {
+    display: inline-block;
+    width: 150px;
+    margin-left: auto;
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+    color: #fff;
+    background-color: #90ee90;
+    cursor: pointer;
+    &:hover {
+        opacity: 0.8;
+    }
+}
+
+.products__table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 3px;
+}
+
+.products__thead-th,
+.products__tbody-td {
+    border: 1px solid #333;
+    padding: 10px;
+}
+
+.products__tbody-td-link-main {
+    text-align: center;
+    padding: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.products__tbody-td-btn {
+    padding: 5px;
+    border: none;
+    border-radius: 3px;
+    color: #fff;
+    background-color: lightseagreen;
+    cursor: pointer;
+    &:hover {
+        opacity: 0.8;
+    }
+}
+
+.products__delete-btn {
+    text-align: center;
+    padding: 5px;
+    border: none;
+    border-radius: 3px;
+    color: #fff;
+    cursor: pointer;
+    background-color: lightcoral;
+    &:hover {
+        opacity: 0.8;
+    }
+}
