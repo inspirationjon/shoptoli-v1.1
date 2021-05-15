@@ -71,12 +71,12 @@
 
 .categories__thead-th,
 .categories__tbody-td {
-    text-align: center;
     border: 1px solid #333;
     padding: 10px;
 }
 
 .categories__tbody-td-link-main {
+    text-align: center;
     padding: 0;
     padding-top: 0;
     padding-bottom: 0;
@@ -95,6 +95,7 @@
 }
 
 .categories__delete-btn {
+    text-align: center;
     padding: 5px;
     border: none;
     border-radius: 3px;

@@ -3,13 +3,12 @@ import './CategoriesBox.scss'
 import { client } from '../../utils/api-client'
 import useAuth from '../../hooks/useAuth'
 import { useQuery } from 'react-query'
-import { IconEdit } from '../Lib/Svg'
 import EditCategoryModal from '../EditCategoryModal/EditCategoryModal'
 
 function CategoriesBox() {
     const [auth] = useAuth()
     const { data, isSuccess } = useQuery({
-        queryKey: 'single-order',
+        queryKey: 'categories',
         queryFn: () => client('admin/catagories', { token: auth.token }),
     })
 
