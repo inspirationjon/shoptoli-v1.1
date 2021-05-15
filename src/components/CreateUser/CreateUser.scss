@@ -34,9 +34,11 @@
 }
 
 .create-user__list {
+   height: 350px;
+   overflow-y: auto;
    margin: 0;
    margin-left: 20px;
-   padding: 0;
+   padding: 15px;
    list-style-type: none;
 }
 
