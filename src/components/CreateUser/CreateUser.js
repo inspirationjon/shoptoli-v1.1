@@ -29,13 +29,13 @@ function CreateUser() {
             password.current.value = ''
          })
          .catch(err => console.log(err))
-         setCount(count + 1)
+      setCount(count + 1)
    }
 
-   function deleteUser (evt) {
+   function deleteUser(evt) {
       console.log(evt.currentTarget.dataset.id);
       const data = {
-            "admin_id": evt.currentTarget.dataset.id
+         "admin_id": evt.currentTarget.dataset.id
       }
 
       fetch(process.env.REACT_APP_API_URL + '/admin/admins', {
@@ -50,7 +50,7 @@ function CreateUser() {
          .then(res => console.log(res))
          .catch(err => console.log(err))
 
-         setCount(count + 1)
+      setCount(count + 1)
    }
 
    useEffect(() => {
