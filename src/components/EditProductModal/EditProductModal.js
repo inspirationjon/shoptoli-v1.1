@@ -8,7 +8,6 @@ function EditProductModal({ modal, setModal }) {
     function handleSaveOrder(evt) {
         evt.preventDefault()
         const { product_status } = evt.target.elements
-
         fetch(process.env.REACT_APP_API_URL + '/admin/products', {
             method: 'PUT',
             headers: {
@@ -29,10 +28,6 @@ function EditProductModal({ modal, setModal }) {
                 }
             })
 
-        console.log({
-            product_status: product_status.value.trim(),
-            product_id: modal.product_id,
-        })
         setModal({ open: false })
     }
 
@@ -43,7 +38,7 @@ function EditProductModal({ modal, setModal }) {
     return (
         <div
             className='category-modal__wrapper'
-            style={{ display: modal.open ? 'flex' : 'none' }}>
+            style={{ display: modal?.open ? 'flex' : 'none' }}>
             <form
                 className='category-modal'
                 method='POST'
@@ -58,12 +53,20 @@ function EditProductModal({ modal, setModal }) {
                     </button>
                 </div>
 
+                <img
+                    src={modal?.product_image}
+                    alt='Product'
+                    width='200'
+                    height='200'
+                />
+
                 <div className='category-modal__input-box'>
                     <label
                         className='category-modal__label'
                         htmlFor='product_status'>
                         Mahsulot holati
                     </label>
+
                     <select
                         className='products__create-input'
                         name='product_status'

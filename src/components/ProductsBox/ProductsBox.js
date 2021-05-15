@@ -83,6 +83,7 @@ function ProductsBox() {
             product_id: evt.target.dataset.productid,
             language_id: evt.target.dataset.languageid,
             product_status: evt.target.dataset.productstatus,
+            product_image: evt.target.dataset.productimage,
         })
     }
 
@@ -250,6 +251,7 @@ function ProductsBox() {
                                         onClick={handleClickModalEdit}
                                         data-languageid={item?.language_id}
                                         data-productid={item?.product_id}
+                                        data-productimage={item?.product_image}
                                         data-productstatus={
                                             item?.product_status
                                         }>
