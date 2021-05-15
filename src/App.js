@@ -12,7 +12,6 @@ import Products from './screens/Products/Products'
 import Statistics from './screens/Statistics/Statistics'
 import Settings from './screens/Settings/Settings'
 import Login from './screens/Login/Login'
-import SingleCategory from './screens/SingleCategory/SingleCategory'
 
 function App() {
     let { pathname } = useLocation()

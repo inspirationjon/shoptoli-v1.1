@@ -3,8 +3,8 @@ import './CategoriesBox.scss'
 import { client } from '../../utils/api-client'
 import useAuth from '../../hooks/useAuth'
 import { useQuery } from 'react-query'
-import { IconMoreLink, IconEdit } from '../Lib/Svg'
-import { Link } from 'react-router-dom'
+import { IconEdit } from '../Lib/Svg'
+import EditCategoryModal from '../EditCategoryModal/EditCategoryModal'
 
 function CategoriesBox() {
     const [auth] = useAuth()
@@ -12,8 +12,6 @@ function CategoriesBox() {
         queryKey: 'single-order',
         queryFn: () => client('admin/catagories', { token: auth.token }),
     })
-
-    const [categoryId, setCategoryId] = React.useState()
 
     function handleSubmitCreateCategory(evt) {
         evt.preventDefault()
@@ -28,7 +26,7 @@ function CategoriesBox() {
             },
             token: auth.token,
         }).then((data) => {
-            setCategoryId(data.data[0].catagory_id)
+            let categoryId = data.data[0].catagory_id
 
             categoryId &&
                 client('admin/catagoriesinfo', {
@@ -38,7 +36,7 @@ function CategoriesBox() {
                         catagory_id: categoryId,
                     },
                     token: auth.token,
-                }).then((data) => alert(data.message))
+                })
 
             categoryId &&
                 client('admin/catagoriesinfo', {
@@ -48,7 +46,17 @@ function CategoriesBox() {
                         catagory_id: categoryId,
                     },
                     token: auth.token,
-                }).then((data) => alert(data.message))
+                }).then((data) => {alert(data.message)})
+        })
+    }
+
+    const [modal, setModal] = React.useState({})
+
+    function handleClickModalEdit(evt) {
+        setModal({
+            open: true,
+            language_id: evt.target.dataset.languageid,
+            catagory_info_id: evt.target.dataset.infoid,
         })
     }
 
@@ -62,7 +70,7 @@ function CategoriesBox() {
             body: JSON.stringify({
                 catagory_id: evt.target.dataset.delid,
             }),
-        }).then((data) => alert(data.message))
+        }).then((data) => alert(data.message ? data.message : 'Uh oh, xato!'))
     }
     return (
         <div className='categories__wrapper'>
@@ -93,7 +101,7 @@ function CategoriesBox() {
                     <tr className='categories__thead-tr'>
                         <th className='categories__thead-th'>Name</th>
                         <th className='categories__thead-th'>Sale</th>
-                        <th className='categories__thead-th'>Ko'proq</th>
+                        <th className='categories__thead-th'>Tahrirlash</th>
                         <th className='categories__thead-th'>O'chirish</th>
                     </tr>
                 </thead>
@@ -102,7 +110,7 @@ function CategoriesBox() {
                         data?.data?.map((item) => (
                             <tr
                                 className='categories__tbody-tr'
-                                key={Math.round() + item?.catagory_info_name}>
+                                key={Math.random()}>
                                 <td className='categories__tbody-td'>
                                     {item?.catagory_info_name}
                                 </td>
@@ -110,8 +118,12 @@ function CategoriesBox() {
                                     {item?.catagory_keyword}
                                 </td>
                                 <td className='categories__tbody-td categories__tbody-td-link-main'>
-                                    <button className='categories__tbody-td-btn'>
-                                        <IconEdit />
+                                    <button
+                                        className='categories__tbody-td-btn'
+                                        onClick={handleClickModalEdit}
+                                        data-languageid={item?.language_id}
+                                        data-infoid={item?.catagory_info_id}>
+                                        tahrirlash
                                     </button>
                                 </td>
                                 <td className='categories__tbody-td categories__tbody-td-del'>
@@ -126,6 +138,8 @@ function CategoriesBox() {
                         ))}
                 </tbody>
             </table>
+
+            <EditCategoryModal modal={modal} setModal={setModal} />
         </div>
     )
 }
