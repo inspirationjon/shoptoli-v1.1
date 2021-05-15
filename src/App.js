@@ -12,6 +12,7 @@ import Products from './screens/Products/Products'
 import Statistics from './screens/Statistics/Statistics'
 import Settings from './screens/Settings/Settings'
 import Login from './screens/Login/Login'
+import SingleCategory from './screens/SingleCategory/SingleCategory'
 
 function App() {
     let { pathname } = useLocation()
@@ -33,20 +34,14 @@ function App() {
                                 component={Clients}
                                 exact
                             />
-                            <Private
-                                path='/products'
-                                component={Products}
-                                exact
-                            />
+                            <Private path='/products' component={Products} />
+
                             <Private
                                 path='/statistics'
                                 component={Statistics}
                                 exact
                             />
-                            <Private
-                                path='/settings'
-                                component={Settings}
-                            />
+                            <Private path='/settings' component={Settings} />
                         </Switch>
                     </div>
                 </div>

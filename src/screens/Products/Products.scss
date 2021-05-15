@@ -1,5 +1,34 @@
-.products-section{
+.products-section {
     padding: 30px;
+}
+
+.products-section {
+    padding: 20px 20px;
+}
+
+.products-section__list {
+    margin: 0;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0;
     display: flex;
-    
+    justify-content: space-between;
+    background-color: #fff;
+    border-radius: 50px;
+    max-width: 300px;
+    overflow: hidden;
+    list-style-type: none;
+}
+
+.products-section__link {
+    display: inline-block;
+    padding: 15px 34.5px;
+    text-decoration: none;
+    color: #a5a5a5;
+    border-radius: 50px;
+}
+
+.products-section__link-active {
+    background: #edeef1;
+    color: #515977;
 }

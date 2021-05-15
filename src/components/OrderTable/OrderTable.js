@@ -9,7 +9,7 @@ import { IconMoreLink, IconMap, IconRu, IconUz, IconBadge } from '../Lib/Svg'
 import './OrderTable.scss'
 import { TableLoader } from '../Lib/Loader'
 import moment from 'moment'
-import useUser from '../../hooks/useAuth'
+import useAuth from '../../hooks/useAuth'
 import { useQuery } from 'react-query'
 import clientIO from 'socket.io-client'
 
@@ -24,11 +24,21 @@ function OrderTable() {
         setNews(obj)
     })
 
-    const [user] = useUser()
+    const [auth, setAuth] = useAuth()
     const [page, setPage] = React.useState(1)
 
+    React.useEffect(() => {
+        client('admin/orders/uz/5/1', { token: auth.token }).then(
+            (response) => {
+                if (response.code === 401) {
+                    setAuth(false)
+                }
+            }
+        )
+    }, [auth.token, setAuth])
+
     const fetchProjects = (page = 0) =>
-        client('admin/orders/uz/5/' + page, { token: user.token })
+        client('admin/orders/uz/5/' + page, { token: auth.token })
 
     const {
         data: orders,
@@ -90,7 +100,7 @@ function OrderTable() {
                                     )}
                                     <IconBadge
                                         className='orders-table__client-badge'
-                                        color={generateBadge(n?.badge).color}
+                                        color={generateBadge(n?.badge)?.color}
                                     />
                                     <p className='orders-table__body-td-name'>
                                         {n?.first_name}
@@ -117,7 +127,7 @@ function OrderTable() {
                                     <a
                                         className='orders-table__body-td-map-link'
                                         target='__blank'
-                                        href={`https://www.google.com/maps/place/${n.latitude},${n.longitude}`}>
+                                        href={`https://www.google.com/maps/place/${n?.latitude},${n?.longitude}`}>
                                         <IconMap />
                                     </a>
                                 </td>
@@ -131,15 +141,15 @@ function OrderTable() {
                                         style={{
                                             backgroundColor: generateStatus(
                                                 n?.status
-                                            ).color,
+                                            )?.color,
                                         }}>
-                                        {generateStatus(n?.status).status}
+                                        {generateStatus(n?.status)?.status}
                                     </button>
                                 </td>
 
                                 <td className='orders-table__body-td '>
                                     <Link
-                                        to={`/order/${n.id}`}
+                                        to={`/order/${n?.id}`}
                                         className='orders-table__body-td--more-link'>
                                         <IconMoreLink />
                                     </Link>
@@ -152,13 +162,13 @@ function OrderTable() {
                             {orders?.data?.map((item, index) => (
                                 <tr
                                     className='orders-table__body-tr'
-                                    key={item.created}>
+                                    key={item?.created}>
                                     <td className='orders-table__body-td'>
                                         {item?.id}
                                     </td>
 
                                     <td className='orders-table__body-td'>
-                                        {moment(item?.created).format(
+                                        {moment(item?.created)?.format(
                                             'MMMM Do, HH:mm'
                                         )}
                                     </td>
@@ -172,7 +182,8 @@ function OrderTable() {
                                         <IconBadge
                                             className='orders-table__client-badge'
                                             color={
-                                                generateBadge(item?.badge).color
+                                                generateBadge(item?.badge)
+                                                    ?.color
                                             }
                                         />
                                         <p className='orders-table__body-td-name'>
@@ -200,7 +211,7 @@ function OrderTable() {
                                         <a
                                             className='orders-table__body-td-map-link'
                                             target='__blank'
-                                            href={`https://www.google.com/maps/place/${item.latitude},${item.longitude}`}>
+                                            href={`https://www.google.com/maps/place/${item?.latitude},${item?.longitude}`}>
                                             <IconMap />
                                         </a>
                                     </td>
@@ -216,18 +227,18 @@ function OrderTable() {
                                             style={{
                                                 backgroundColor: generateStatus(
                                                     item?.status
-                                                ).color,
+                                                )?.color,
                                             }}>
                                             {
                                                 generateStatus(item?.status)
-                                                    .status
+                                                    ?.status
                                             }
                                         </button>
                                     </td>
 
                                     <td className='orders-table__body-td '>
                                         <Link
-                                            to={`/order/${item.id}`}
+                                            to={`/order/${item?.id}`}
                                             className='orders-table__body-td--more-link'>
                                             <IconMoreLink />
                                         </Link>
