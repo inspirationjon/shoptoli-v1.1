@@ -1,7 +1,10 @@
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import './ChangeInfo.scss'
 
 function ChangeInfo() {
+   const postMethod = "POST"
+   const updateMethod = "PUT"
+   const [data, setData] = useState({})
    const companyName = useRef()
    const catalogLink = useRef()
    const mediaLink = useRef()
@@ -10,6 +13,31 @@ function ChangeInfo() {
    const email = useRef()
    const deliveryPrice = useRef()
    const freeDeliveryLimit = useRef()
+
+   useEffect(() => {
+      if (data) {
+         companyName.current.value = data.info_company_name
+         catalogLink.current.value = data.info_catalog_link
+         mediaLink.current.value = data.info_media
+         phone.current.value = data.info_phone
+         adress.current.value = data.info_address
+         email.current.value = data.info_email
+         deliveryPrice.current.value = data.info_delivery_price
+         freeDeliveryLimit.current.value = data.info_free_delivery_limit
+      }
+   }, [data])
+
+   useEffect(() => {
+      
+      fetch(process.env.REACT_APP_API_URL + '/admin/infos', {
+         headers: {
+            'Content-Type': 'application/json',
+            token: JSON.parse(window.localStorage.getItem('__auth_provider_token__')).token
+         }
+      })
+      .then(res => res.json())
+      .then(res => setData(res.data[0]))
+   }, [])
 
    function changeCompanyInfo(evt) {
       evt.preventDefault()
@@ -22,18 +50,20 @@ function ChangeInfo() {
          "info_address": adress.current.value,
          "info_email": email.current.value,
          "info_delivery_price": Number(deliveryPrice.current.value),
-         "info_free_delivery_limit": Number(freeDeliveryLimit.current.value)
+         "info_free_delivery_limit": Number(freeDeliveryLimit.current.value),
+         "info_id": 1
       }
 
       fetch(process.env.REACT_APP_API_URL + '/admin/infos', {
-         method: "POST",
+         method: data ? updateMethod : postMethod,
          body: JSON.stringify(data),
          headers: {
             'Content-Type': 'application/json',
             token: JSON.parse(window.localStorage.getItem('__auth_provider_token__')).token
          }
       })
-      .then(res => res.json)
+      .then(res => console.log(res))
+      // .then(res => console.log(res))
       .catch(err => console.log(err))
    }
 
@@ -96,7 +126,9 @@ function ChangeInfo() {
                placeholder="Free delivery limit"
                required
             />
-            <button className="create-user__btn change-btn" type="submit">Create</button>
+            <button className="create-user__btn change-btn" type="submit">
+               {data ? 'Update' : 'Create'}
+            </button>
          </form>
       </div>
    )

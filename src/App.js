@@ -11,6 +11,7 @@ import Clients from './screens/Clients/Clients'
 import Products from './screens/Products/Products'
 import Statistics from './screens/Statistics/Statistics'
 import Settings from './screens/Settings/Settings'
+import ClientOne from './components/ClientOne/ClientOne'
 import Login from './screens/Login/Login'
 
 function App() {
@@ -31,6 +32,16 @@ function App() {
                             <Private
                                 path='/clients'
                                 component={Clients}
+                                exact
+                            />
+                            <Private
+                                path='/clients/:id'
+                                component={ClientOne}
+                                exact
+                            />
+                            <Private
+                                path='/products'
+                                component={Products}
                                 exact
                             />
                             <Private path='/products' component={Products} />
