@@ -6,6 +6,7 @@
    margin: 0;
    margin-left: auto;
    margin-right: auto;
+   margin-bottom: 30px;
    padding: 0;
    display: flex;
    justify-content: space-between;
@@ -25,6 +26,6 @@
 }
 
 .settings__link-active {
-   background: #EDEEF1;
+   background-color: #EDEEF1;
    color: #515977;
 }
