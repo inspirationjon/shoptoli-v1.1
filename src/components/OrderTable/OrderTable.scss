@@ -63,6 +63,15 @@
     margin: 0;
 }
 
+.orders-table__body-td-name-link {
+    text-decoration: none;
+    color: #313131;
+
+    &:hover{
+        text-decoration: underline;
+    }
+}
+
 .orders-table__head-th {
     font-weight: 700;
 }

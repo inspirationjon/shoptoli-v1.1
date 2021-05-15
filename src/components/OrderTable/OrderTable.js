@@ -159,7 +159,7 @@ function OrderTable() {
 
                     {isSuccess ? (
                         <>
-                            {orders?.data?.map((item, index) => (
+                            {orders?.data?.map((item) => (
                                 <tr
                                     className='orders-table__body-tr'
                                     key={item?.created}>
@@ -187,7 +187,13 @@ function OrderTable() {
                                             }
                                         />
                                         <p className='orders-table__body-td-name'>
-                                            {item?.first_name}
+                                            <Link className='orders-table__body-td-name-link'
+                                                to={
+                                                    '/clients/' +
+                                                    item?.client_id
+                                                }>
+                                                {item?.first_name}
+                                            </Link>
                                         </p>
                                     </td>
 
