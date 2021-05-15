@@ -1,34 +1,20 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { client } from '../../utils/api-client'
-import { generateStatus } from '../../utils/generate-status'
 import { generateBadge } from '../../utils/generate-badge'
 import TablePaginationController from '../TablePaginationController/TablePaginationController'
-import StatusModal from '../StatusModal/StatusModal'
-import { IconMoreLink, IconMap, IconRu, IconUz, IconBadge } from '../Lib/Svg'
+import { IconRu, IconUz, IconBadge } from '../Lib/Svg'
 import './UsersTable.scss'
 import { TableLoader } from '../Lib/Loader'
-import moment from 'moment'
-import useUser from '../../hooks/useAuth'
+import useAuth from '../../hooks/useAuth'
 import { useQuery } from 'react-query'
-import clientIO from 'socket.io-client'
 
 function UsersTable() {
-    const socket = clientIO(process.env.REACT_APP_API_URL, {
-        transports: ['websocket'],
-    })
-
-    const [news, setNews] = React.useState(null)
-
-    socket.on('client_order', (obj) => {
-        setNews(obj)
-    })
-
-    const [user] = useUser()
+    const [auth] = useAuth()
     const [page, setPage] = React.useState(1)
 
     const fetchProjects = (page = 0) =>
-        client('admin/clients/uz/5/' + page, { token: user.token })
+        client('admin/clients/uz/5/' + page, { token: auth.token })
 
     const {
         data: orders,
@@ -39,15 +25,6 @@ function UsersTable() {
         keepPreviousData: true,
     })
 
-    const [modal, setModal] = React.useState({})
-
-    function handleClickModalStatus(evt) {
-        setModal({
-            open: true,
-            order_id: evt.target.dataset.orderid,
-            order_status: evt.target.dataset.orderstatus,
-        })
-    }
     return (
         <div className='orders-table__wrapper'>
             <table className='orders-table'>
@@ -58,13 +35,11 @@ function UsersTable() {
                         <th className='orders-table__head-th'>Telefon raqam</th>
                         <th className='orders-table__head-th'>Buyurtmalar</th>
                         <th className='orders-table__head-th'>Manzil</th>
-                  
                     </tr>
                 </thead>
 
                 {isError ? 'Error' : null}
                 <tbody className='orders-table__body'>
-                  
                     {isSuccess ? (
                         <>
                             {orders?.data?.map((item) => (
@@ -75,7 +50,7 @@ function UsersTable() {
                                         {item?.client_id}
                                     </td>
 
-                                   <td className='orders-table__body-td orders-table__body-td-name-td'>
+                                    <td className='orders-table__body-td orders-table__body-td-name-td'>
                                         {item?.language === 'uz' ? (
                                             <IconUz className='orders-table__lang-icon' />
                                         ) : (
@@ -89,7 +64,14 @@ function UsersTable() {
                                             }
                                         />
                                         <p className='orders-table__body-td-name'>
-                                            <Link className='orders-table__body-td-name-link' to={'/clients/' + item?.client_id}>{item?.first_name}</Link>
+                                            <Link
+                                                className='orders-table__body-td-name-link'
+                                                to={
+                                                    '/clients/' +
+                                                    item?.client_id
+                                                }>
+                                                {item?.first_name}
+                                            </Link>
                                         </p>
                                     </td>
 
@@ -108,8 +90,6 @@ function UsersTable() {
                                     <td className='orders-table__body-td'>
                                         {item?.region}
                                     </td>
-  
-                                    
                                 </tr>
                             ))}
                         </>
@@ -126,8 +106,6 @@ function UsersTable() {
                 noPrev={page === 1 ? true : false}
                 noNext={orders?.data?.length ? false : true}
             />
-
-            <StatusModal modal={modal} setModal={setModal} />
         </div>
     )
 }

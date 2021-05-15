@@ -28,17 +28,6 @@ function SingleOrder() {
         queryFn: () => client('admin/order/uz/' + id, { token: auth.token }),
     })
 
-    let isDeliveryFree = false
-
-    function stil(num, sale, limit = 5) {
-        if (num >= limit && sale === 'sale') {
-            isDeliveryFree = true
-        } else {
-            isDeliveryFree = false
-        }
-        return num
-    }
-
     const order = isSuccess && data?.data[0]
 
     const [modal, setModal] = React.useState({})
