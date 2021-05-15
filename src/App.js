@@ -44,15 +44,14 @@ function App() {
                                 component={Products}
                                 exact
                             />
+                            <Private path='/products' component={Products} />
+
                             <Private
                                 path='/statistics'
                                 component={Statistics}
                                 exact
                             />
-                            <Private
-                                path='/settings'
-                                component={Settings}
-                            />
+                            <Private path='/settings' component={Settings} />
                         </Switch>
                     </div>
                 </div>

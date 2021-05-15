@@ -97,7 +97,7 @@ function SingleOrder() {
                             <div className='single-order__content-top'>
                                 <a
                                     className='single-order__location-link'
-                                    href={`https://www.google.com/maps/place/${order.latitude},${order.longitude}`}
+                                    href={`https://www.google.com/maps/place/${order?.latitude},${order?.longitude}`}
                                     target='__blank'>
                                     <h3 className='single-order__location-heading'>
                                         Manzil
@@ -119,9 +119,9 @@ function SingleOrder() {
                                         style={{
                                             backgroundColor: generateStatus(
                                                 order?.status
-                                            ).color,
+                                            )?.color,
                                         }}>
-                                        {generateStatus(order?.status).status}
+                                        {generateStatus(order?.status)?.status}
                                     </button>
                                 </div>
                             </div>
@@ -141,7 +141,7 @@ function SingleOrder() {
                                     </tr>
                                 </thead>
                                 <tbody className='single-order-table__body'>
-                                    {order.orders.map((n, index) => {
+                                    {order?.orders?.map((n, index) => {
                                         return (
                                             <tr
                                                 className='single-order-table__body-td'
@@ -150,11 +150,7 @@ function SingleOrder() {
                                                     {n?.name}
                                                 </td>
                                                 <td className='single-order-table__body-td'>
-                                                    {stil(
-                                                        n?.quantity,
-                                                        n?.keyword,
-                                                        order.free_delivery_limit
-                                                    )}
+                                                    {n?.quantity}
                                                 </td>
                                                 <td className='single-order-table__body-td'>
                                                     {n?.price}
@@ -164,14 +160,6 @@ function SingleOrder() {
                                     })}
                                 </tbody>
                                 <caption className='single-order-table__caption'>
-                                    <p>
-                                        Yetkazib berish:{' '}
-                                        <strong>
-                                            {isDeliveryFree
-                                                ? 0
-                                                : formatMoney(order?.delivery)}
-                                        </strong>
-                                    </p>
                                     <p>
                                         Jami:{' '}
                                         <strong>

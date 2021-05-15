@@ -63,22 +63,6 @@ function StatusModal({ modal, setModal }) {
                     <input
                         className='status-modal__input visually-hidden'
                         type='radio'
-                        value='0'
-                        id='user_status_cart'
-                        name='user_status'
-                        onChange={handleChangeInput}
-                    />
-                    <label
-                        className='status-modal__label'
-                        htmlFor='user_status_cart'>
-                        Cart
-                    </label>
-                </label>
-
-                <label className='status-modal__input-wrapper'>
-                    <input
-                        className='status-modal__input visually-hidden'
-                        type='radio'
                         value='1'
                         id='user_status_ordered'
                         name='user_status'
@@ -136,38 +120,6 @@ function StatusModal({ modal, setModal }) {
                         className='status-modal__label'
                         htmlFor='user_status_completed'>
                         Completed
-                    </label>
-                </label>
-
-                <label className='status-modal__input-wrapper'>
-                    <input
-                        className='status-modal__input visually-hidden'
-                        type='radio'
-                        value='5'
-                        id='user_status_cancelled'
-                        name='user_status'
-                        onChange={handleChangeInput}
-                    />
-                    <label
-                        className='status-modal__label'
-                        htmlFor='user_status_cancelled'>
-                        Cancelled
-                    </label>
-                </label>
-
-                <label className='status-modal__input-wrapper'>
-                    <input
-                        className='status-modal__input visually-hidden'
-                        type='radio'
-                        value='6'
-                        id='user_status_cleaned'
-                        name='user_status'
-                        onChange={handleChangeInput}
-                    />
-                    <label
-                        className='status-modal__label'
-                        htmlFor='user_status_cleaned'>
-                        Cleaned
                     </label>
                 </label>
 
