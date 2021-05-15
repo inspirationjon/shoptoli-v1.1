@@ -22,6 +22,7 @@ function ClientOne() {
    }, [id])
 
    return (
+      
       <div className="clientone">
          {data && <h2 className="clientone-name">{data[0].fullname ? data[0].fullname : data[0].first_name}</h2>}
          {data && <p className="clientone-phone">{data[0].phone}</p>}
