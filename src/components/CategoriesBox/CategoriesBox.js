@@ -45,7 +45,9 @@ function CategoriesBox() {
                         catagory_id: categoryId,
                     },
                     token: auth.token,
-                }).then((data) => {alert(data.message)})
+                }).then((data) => {
+                    alert(data.message ? 'Yaratildi 😄' : 'Uh oh, xatolik! 🥴')
+                })
         })
     }
 
@@ -69,7 +71,7 @@ function CategoriesBox() {
             body: JSON.stringify({
                 catagory_id: evt.target.dataset.delid,
             }),
-        }).then((data) => alert(data.message ? data.message : 'Uh oh, xato!'))
+        }).then(() => alert("O'chdi 😨"))
     }
     return (
         <div className='categories__wrapper'>

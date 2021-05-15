@@ -1,24 +1,23 @@
 import React from 'react'
-import './EditCategoryModal.scss'
+import './EditProductModal.scss'
 import useAuth from '../../hooks/useAuth'
 
-function EditCategoryModal({ modal, setModal }) {
+function EditProductModal({ modal, setModal }) {
     const [auth] = useAuth()
 
     function handleSaveOrder(evt) {
         evt.preventDefault()
-        const { catagory_info_name } = evt.target.elements
+        const { product_status } = evt.target.elements
 
-        fetch(process.env.REACT_APP_API_URL + '/admin/catagoriesinfo', {
+        fetch(process.env.REACT_APP_API_URL + '/admin/products', {
             method: 'PUT',
             headers: {
                 token: auth.token,
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                catagory_info_name: catagory_info_name.value.trim(),
-                language_id: modal.language_id,
-                catagory_info_id: modal.catagory_info_id,
+                product_status: product_status.value.trim(),
+                product_id: modal.product_id,
             }),
         })
             .then((msg) => msg.json())
@@ -30,6 +29,10 @@ function EditCategoryModal({ modal, setModal }) {
                 }
             })
 
+        console.log({
+            product_status: product_status.value.trim(),
+            product_id: modal.product_id,
+        })
         setModal({ open: false })
     }
 
@@ -58,17 +61,18 @@ function EditCategoryModal({ modal, setModal }) {
                 <div className='category-modal__input-box'>
                     <label
                         className='category-modal__label'
-                        htmlFor='catagory_info_name'>
-                        Kategoriya nomi
+                        htmlFor='product_status'>
+                        Mahsulot holati
                     </label>
-                    <input
-                        type='text'
-                        className='category-modal__input'
-                        id='catagory_info_name'
-                        name='catagory_info_name'
-                        placeholder='Kategoriya nomi'
-                        required
-                    />
+                    <select
+                        className='products__create-input'
+                        name='product_status'
+                        id='product_status'
+                        defaultValue={modal?.product_status}
+                        required>
+                        <option value='0'>off</option>
+                        <option value='1'>on</option>
+                    </select>
                 </div>
 
                 <button className='category-modal__submit-btn' type='submit'>
@@ -79,4 +83,4 @@ function EditCategoryModal({ modal, setModal }) {
     )
 }
 
-export default EditCategoryModal
+export default EditProductModal
