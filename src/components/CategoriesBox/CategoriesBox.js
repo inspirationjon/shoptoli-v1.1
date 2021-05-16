@@ -97,48 +97,55 @@ function CategoriesBox() {
 
                 <button className='category__create-btn'>Yaratish</button>
             </form>
-            <table className='categories__table'>
-                <thead className='categories__thead'>
-                    <tr className='categories__thead-tr'>
-                        <th className='categories__thead-th'>Name</th>
-                        <th className='categories__thead-th'>Sale</th>
-                        <th className='categories__thead-th'>Tahrirlash</th>
-                        <th className='categories__thead-th'>O'chirish</th>
-                    </tr>
-                </thead>
-                <tbody className='categories__tbody'>
-                    {isSuccess &&
-                        data?.data?.map((item) => (
-                            <tr
-                                className='categories__tbody-tr'
-                                key={Math.random()}>
-                                <td className='categories__tbody-td'>
-                                    {item?.catagory_info_name}
-                                </td>
-                                <td className='categories__tbody-td'>
-                                    {item?.catagory_keyword}
-                                </td>
-                                <td className='categories__tbody-td categories__tbody-td-link-main'>
-                                    <button
-                                        className='categories__tbody-td-btn'
-                                        onClick={handleClickModalEdit}
-                                        data-languageid={item?.language_id}
-                                        data-infoid={item?.catagory_info_id}>
-                                        tahrirlash
-                                    </button>
-                                </td>
-                                <td className='categories__tbody-td categories__tbody-td-del'>
-                                    <button
-                                        className='categories__delete-btn'
-                                        data-delid={item?.catagory_id}
-                                        onDoubleClick={handleDeleteCategory}>
-                                        o'chirish
-                                    </button>
-                                </td>
-                            </tr>
-                        ))}
-                </tbody>
-            </table>
+
+            <div className='categories__table-wrapper'>
+                <table className='categories__table'>
+                    <thead className='categories__thead'>
+                        <tr className='categories__thead-tr'>
+                            <th className='categories__thead-th'>Name</th>
+                            <th className='categories__thead-th'>Sale</th>
+                            <th className='categories__thead-th'>Tahrirlash</th>
+                            <th className='categories__thead-th'>O'chirish</th>
+                        </tr>
+                    </thead>
+                    <tbody className='categories__tbody'>
+                        {isSuccess &&
+                            data?.data?.map((item) => (
+                                <tr
+                                    className='categories__tbody-tr'
+                                    key={Math.random()}>
+                                    <td className='categories__tbody-td'>
+                                        {item?.catagory_info_name}
+                                    </td>
+                                    <td className='categories__tbody-td'>
+                                        {item?.catagory_keyword}
+                                    </td>
+                                    <td className='categories__tbody-td categories__tbody-td-link-main'>
+                                        <button
+                                            className='categories__tbody-td-btn'
+                                            onClick={handleClickModalEdit}
+                                            data-languageid={item?.language_id}
+                                            data-infoid={
+                                                item?.catagory_info_id
+                                            }>
+                                            tahrirlash
+                                        </button>
+                                    </td>
+                                    <td className='categories__tbody-td categories__tbody-td-del'>
+                                        <button
+                                            className='categories__delete-btn'
+                                            data-delid={item?.catagory_id}
+                                            onDoubleClick={
+                                                handleDeleteCategory
+                                            }>
+                                            o'chirish
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
+                    </tbody>
+                </table>
+            </div>
 
             <EditCategoryModal modal={modal} setModal={setModal} />
         </div>

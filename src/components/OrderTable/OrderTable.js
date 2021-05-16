@@ -83,7 +83,7 @@ function OrderTable() {
                             {orders?.data?.map((item) => (
                                 <tr
                                     className='orders-table__body-tr'
-                                    key={item?.created}>
+                                    key={Math.random()}>
                                     <td className='orders-table__body-td'>
                                         {item?.id}
                                     </td>

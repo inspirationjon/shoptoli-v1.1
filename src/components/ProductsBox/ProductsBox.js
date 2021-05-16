@@ -224,52 +224,58 @@ function ProductsBox() {
                     <button className='products__create-btn'>Yaratish</button>
                 </div>
             </form>
-            <table className='products__table'>
-                <thead className='products__thead'>
-                    <tr className='products__thead-tr'>
-                        <th className='products__thead-th'>Name</th>
-                        <th className='products__thead-th'>Ma'lumot</th>
-                        <th className='products__thead-th'>Tahrirlash</th>
-                        <th className='products__thead-th'>O'chirish</th>
-                    </tr>
-                </thead>
-                <tbody className='products__tbody'>
-                    {isSuccess &&
-                        data?.data?.map((item) => (
-                            <tr
-                                className='products__tbody-tr'
-                                key={Math.random()}>
-                                <td className='products__tbody-td'>
-                                    {item?.product_info_name}
-                                </td>
-                                <td className='products__tbody-td'>
-                                    {item?.product_info_desc}
-                                </td>
-                                <td className='products__tbody-td products__tbody-td-link-main'>
-                                    <button
-                                        className='products__tbody-td-btn'
-                                        onClick={handleClickModalEdit}
-                                        data-languageid={item?.language_id}
-                                        data-productid={item?.product_id}
-                                        data-productimage={item?.product_image}
-                                        data-productstatus={
-                                            item?.product_status
-                                        }>
-                                        holat
-                                    </button>
-                                </td>
-                                <td className='products__tbody-td products__tbody-td-del'>
-                                    <button
-                                        className='products__delete-btn'
-                                        data-delid={item?.product_id}
-                                        onDoubleClick={handleDeleteCategory}>
-                                        o'chirish
-                                    </button>
-                                </td>
-                            </tr>
-                        ))}
-                </tbody>
-            </table>
+            <div className='products__table-wrapper'>
+                <table className='products__table'>
+                    <thead className='products__thead'>
+                        <tr className='products__thead-tr'>
+                            <th className='products__thead-th'>Name</th>
+                            <th className='products__thead-th'>Ma'lumot</th>
+                            <th className='products__thead-th'>Tahrirlash</th>
+                            <th className='products__thead-th'>O'chirish</th>
+                        </tr>
+                    </thead>
+                    <tbody className='products__tbody'>
+                        {isSuccess &&
+                            data?.data?.map((item) => (
+                                <tr
+                                    className='products__tbody-tr'
+                                    key={Math.random()}>
+                                    <td className='products__tbody-td'>
+                                        {item?.product_info_name}
+                                    </td>
+                                    <td className='products__tbody-td'>
+                                        {item?.product_info_desc}
+                                    </td>
+                                    <td className='products__tbody-td products__tbody-td-link-main'>
+                                        <button
+                                            className='products__tbody-td-btn'
+                                            onClick={handleClickModalEdit}
+                                            data-languageid={item?.language_id}
+                                            data-productid={item?.product_id}
+                                            data-productimage={
+                                                item?.product_image
+                                            }
+                                            data-productstatus={
+                                                item?.product_status
+                                            }>
+                                            holat
+                                        </button>
+                                    </td>
+                                    <td className='products__tbody-td products__tbody-td-del'>
+                                        <button
+                                            className='products__delete-btn'
+                                            data-delid={item?.product_id}
+                                            onDoubleClick={
+                                                handleDeleteCategory
+                                            }>
+                                            o'chirish
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
+                    </tbody>
+                </table>
+            </div>
 
             <EditProductModal modal={modal} setModal={setModal} />
         </div>
