@@ -10,7 +10,50 @@
 
 .clientone-phone {
    margin: 0;
-   margin-bottom: 30px;
    padding: 0;
    opacity: 0.8;
+}
+
+.clientone__table {
+   height: 370px;
+   overflow-y: auto;
+}
+
+.clientone__info {
+   margin-bottom: 30px;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+}
+
+.order-sum {
+   margin: 0;
+   padding: 0;
+   
+   span {
+      font-size: 22px;
+      margin-left: 5px;
+      margin-right: 5px;
+      font-weight: 600;
+   }
+}
+
+/* The container must be positioned relative: */
+.custom-select {
+   width: 200px;
+   position: relative;
+   font-family: Arial;
+}
+
+.custom-select select {
+   display: none; /*hide original SELECT element: */
+}
+
+.select-selected {
+   background-color: DodgerBlue;
+}
+
+.clientone__select {
+   padding: 10px 15px;
+   outline: none;
 }
