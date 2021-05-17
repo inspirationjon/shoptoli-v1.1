@@ -9,7 +9,6 @@ import Orders from './screens/Orders/Orders'
 import SingleOrder from './screens/SingleOrder/SingleOrder'
 import Clients from './screens/Clients/Clients'
 import Products from './screens/Products/Products'
-import Statistics from './screens/Statistics/Statistics'
 import Settings from './screens/Settings/Settings'
 import ClientOne from './components/ClientOne/ClientOne'
 import Login from './screens/Login/Login'
@@ -46,11 +45,6 @@ function App() {
                             />
                             <Private path='/products' component={Products} />
 
-                            <Private
-                                path='/statistics'
-                                component={Statistics}
-                                exact
-                            />
                             <Private path='/settings' component={Settings} />
                         </Switch>
                     </div>
