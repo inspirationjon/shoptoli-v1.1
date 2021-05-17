@@ -34,11 +34,12 @@
 }
 
 .category__create-input {
+    font-family: 'Cairo', 'Arial', sans-serif;
     width: 200px;
     margin-right: 10px;
     padding: 10px;
     background-color: #fff;
-    border: 1px solid #333;
+    border: 1px solid #dddddd;
     border-radius: 3px;
 }
 .category__create-select {
@@ -64,14 +65,13 @@
 
 .categories__table {
     width: 100%;
-
     border-collapse: collapse;
     border-radius: 3px;
 }
 
 .categories__thead-th,
 .categories__tbody-td {
-    border: 1px solid #333;
+    border: 1px solid #dddddd;
     padding: 10px;
 }
 

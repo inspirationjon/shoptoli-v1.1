@@ -1,9 +1,10 @@
 import './ClientOne.scss'
 import moment from 'moment'
+import { generateBadge } from '../../utils/generate-badge'
 import { generateStatus } from '../../utils/generate-status'
 import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { IconMap } from '../Lib/Svg'
+import { IconMap, IconBadge } from '../Lib/Svg'
 
 function ClientOne() {
     const [data, setData] = useState()
@@ -40,14 +41,20 @@ function ClientOne() {
         <div className='clientone'>
             <div className="clientone__info">
                 <div>
-                    {data && (
-                        <h2 className='clientone-name'>
-                            {data[0]?.fullname
-                                ? data[0]?.fullname
-                                : data[0]?.first_name}
-                        </h2>
-                    )}
-                    {data && <p className='clientone-phone'>{data[0]?.phone}</p>}
+                    div
+
+                    <div className="clientone__badge">
+                        {
+                            data &&
+                            <IconBadge
+                                className='orders-table__client-badge'
+                                color={
+                                    generateBadge(data[0]?.badge)
+                                        ?.color
+                                }
+                            />
+                        }
+                    </div>
                 </div>
 
                 <select

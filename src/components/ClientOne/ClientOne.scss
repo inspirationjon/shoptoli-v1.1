@@ -38,22 +38,12 @@
    }
 }
 
-/* The container must be positioned relative: */
-.custom-select {
-   width: 200px;
-   position: relative;
-   font-family: Arial;
-}
-
-.custom-select select {
-   display: none; /*hide original SELECT element: */
-}
-
-.select-selected {
-   background-color: DodgerBlue;
-}
-
 .clientone__select {
    padding: 10px 15px;
    outline: none;
+   font-family: 'Cairo', 'Arial', 'sans-serif';
+}
+
+.clientone__badge {
+   position: relative;
 }
