@@ -41,7 +41,16 @@ function ClientOne() {
         <div className='clientone'>
             <div className="clientone__info">
                 <div>
-                    div
+                <div>
+                    {data && (
+                        <h2 className='clientone-name'>
+                            {data[0]?.fullname
+                                ? data[0]?.fullname
+                                : data[0]?.first_name}
+                        </h2>
+                    )}
+                    {data && <p className='clientone-phone'>{data[0]?.phone}</p>}
+                </div>
 
                     <div className="clientone__badge">
                         {
